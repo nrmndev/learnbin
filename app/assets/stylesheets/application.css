@@ -1,0 +1,117 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "highlight.js/styles/github";
+@import "solarized-dark";
+@import "rouge";
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import "tailwindcss";
+@theme {
+  /* SET FONTS */
+  --font-header: "Rubik", sans-serif;
+  --font-body: "Figtree", sans-serif;
+
+  /* SET COLORS */
+  --color-primary-50: #f5fbea;
+  --color-primary-100: #e8f6d1;
+  --color-primary-200: #d2eea8;
+  --color-primary-300: #aadd66;
+  --color-primary-400: #96d04b;
+  --color-primary-500: #76b62c;
+  --color-primary-600: #5b9020;
+  --color-primary-700: #466f1c;
+  --color-primary-800: #3a581c;
+  --color-primary-900: #324b1c;
+  --color-primary-950: #18290a;
+
+  --color-background: #fcf6eb;
+  --color-foreground: #18290a;
+
+  --color-muted: #e6e0d2;
+  --color-muted-foreground: #958e7d;
+}
+
+ul ul {
+  padding-left: 24px;
+}
+.bash {
+  background-color: #3f3f3f;
+  padding: 10px;
+  border-radius: 5px;
+
+  pre {
+    padding-bottom: 10px;
+  }
+
+  code {
+    color: #fdce93;
+    background-color: #3f3f3f;
+  }
+  .hll {
+    background-color: #222;
+  }
+  // Additional token styles ...
+}
+
+// CODE BLOCK
+.code-block {
+  position: relative;
+  margin: 1.5em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #282c34; /* matches dark theme */
+}
+
+/* Header */
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #1e1e1e; */
+  padding: 0.25em 0.75em;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #eee;
+}
+
+.code-lang-label {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Copy button */
+.copy-btn {
+  background: transparent;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.copy-btn:hover {
+  color: #fff;
+}
+
+/* Code block */
+.code-block {
+  background: #1e1e1e;
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.code-block pre {
+  margin: 0;
+  overflow-x: auto;
+}

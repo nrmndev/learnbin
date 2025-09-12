@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "article_frame" do %>
+<h1><%= @section.heading %></h1>
+<p><strong>Content:</strong></p>
+<%# highlight_code(@section.content) %>
+<p><%= sanitize(
+      highlight_code(@section.content),
+      tags: %w[div span button pre code br],
+      attributes: %w[class data-controller data-action data-lang]
+    )
+%></p>
+
+<% end %>
+<%# link_to 'Back to Sections', article_sections_path(@article) %>

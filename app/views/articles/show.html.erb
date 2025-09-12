@@ -1,0 +1,57 @@
+
+
+
+<h1><%= @article.title %></h1>
+<p><strong>Topic:</strong> <%= @article.topic.name %></p>
+<p><strong>Summary:</strong> <%= @article.summary %></p>
+
+
+<%= link_to 'Back to Articles', topic_articles_path(@article.topic) %>
+
+
+<!-- app/views/articles/show.html.erb -->
+<%= turbo_frame_tag "article_frame" do %>
+
+  <!--<h1><%# @article.title %></h1>-->
+  <%# kramdown(@article.summary) %>
+
+<% summary = '<h1>This is my example data in my database</h1>
+<p>It is chunks of HTML with code fences and seems to be working if code fences are not nested inside html tag</p>
+  ```perl
+    npm create vite@latest my-project
+    cd my-project
+  ```
+'
+%>
+<%# render_markdown(summary)  %>
+<%= highlight_code(summary)  %>
+
+<% summary_2 = <<~MD
+  <h1>But this is a sample of code fence inside a table</h1>
+  <table >
+    <tr>
+      <th>Definition</th>
+      <th>Code block</th>
+    </tr>
+    <tr>
+      <td>Apply .block css to display element block</td>
+      <td>
+        <span markdown="1">
+        ```css
+        .block {
+          display: block;
+        }
+        ```
+        </span>
+      </td>
+    </tr>
+  </table>
+  <p>The problem is that it is formatting it</p>
+MD
+%>
+
+
+<% render_markdown(summary)  %>
+
+<%# TURBO_FRAME CLOSING END TAG  %>
+<% end %>

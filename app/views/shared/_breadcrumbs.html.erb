@@ -1,0 +1,22 @@
+<%# locals: (links: []) -%>
+<nav aria-label="Breadcrumb" class="flex">
+  <ol role="list" class="flex items-center space-x-4">
+  <% links.each_with_index do |link, index| %>
+    <li>
+    <div class="flex items-center">
+      <% if index > 0 %>
+      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-gray-300">
+        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+      </svg>
+      <% end %>
+      <% if link[:url] %>
+        <%= link_to link[:text], link[:url], class: "#{index > 0 ? 'ml-4' : ''} text-sm font-medium text-white"  %>
+      <% else %>
+        <span class="ml-4 text-sm font-medium text-white"><%= link[:text] %></span>
+      <% end %>
+    </div>
+  </li>
+
+  <% end %>
+  </ol>
+</nav>

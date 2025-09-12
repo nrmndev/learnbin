@@ -1,0 +1,28 @@
+<h1>Sections</h1>
+
+<%= link_to 'New Section', new_topic_article_section_path(@article.topic, @article), class: 'btn btn-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Heading</th>
+      <th>Article</th>
+      <th>Position</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td><%= section.heading %></td>
+        <td><%= section.article.title %></td>
+        <td><%= section.position %></td>
+        <td>
+          <%= link_to 'Show', topic_article_section_path(@article.topic, @article, section) %> |
+          <%= link_to 'Edit', edit_topic_article_section_path(@article.topic, @article, section) %> |
+          <%= link_to 'Delete', topic_article_section_path(@article.topic, @article, section), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

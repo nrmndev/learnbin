@@ -1,0 +1,25 @@
+<h1>Dashboard</h1>
+
+
+<div class="grid grid-cols-4 gap-3 p-4">
+  <div class="col-span-1">
+  <nav aria-label="Sidebar" class="flex flex-1 flex-col">
+  <ul role="list" class="-mx-2 space-y-1">
+    <li>
+    <% @topics.each do |topic|  %>
+      <%= link_to topic.name, topic_articles_path(topic), class:"group flex gap-x-3 rounded-md bg-gray-50 p-2 text-sm/6 font-semibold text-indigo-600" , data: { turbo_frame: "dashboard_article_list" }%>
+    <% end  %>
+      <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
+    </li>
+  </ul>
+</nav>
+
+
+
+  </div>
+  <div class="col-span-3">
+    <%= turbo_frame_tag "dashboard_article_list" do %>
+      <%= render 'dashboard/article_list', articles: @articles %>
+    <% end %>
+  </div>
+</div>

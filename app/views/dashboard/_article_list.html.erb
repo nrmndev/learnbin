@@ -1,0 +1,27 @@
+
+<%= turbo_frame_tag "dashboard_article_list" do %>
+
+
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="px-3 py-4 text-left text-sm font-medium text-gray-700">Title</th>
+        <th class="px-3 py-4 text-left text-sm font-medium text-gray-700">Created At</th>
+        <th class="px-3 py-4 text-left text-sm font-medium text-gray-700">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+
+      <% articles.each do |article| %>
+        <tr>
+          <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900"><%= article.title %></td>
+          <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500"><%= l(article.created_at, format: :short) %></td>
+          <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
+            <%= link_to "View", article_path(article), class: "text-indigo-600 hover:text-indigo-900" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>

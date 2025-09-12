@@ -1,0 +1,43 @@
+
+<%= turbo_frame_tag "dashboard_article_list" do %>
+<h1><%= @topic.name %> Articles</h1>
+
+<%# link_to 'New Article', new_topic_article_path(@topic), class: 'btn btn-primary' %>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+    <%= link_to 'New Article', new_topic_article_path(@topic), class: 'block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
+    </div>
+  </div>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="relative min-w-full divide-y divide-gray-300">
+          <thead>
+            <tr>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Actions</th>
+              <th scope="col" class="py-3.5 pr-4 pl-3 sm:pr-3">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <% @articles.each do |article| %>
+              <tr class="even:bg-gray-50">
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500"><%= article.title %></td>
+                <td>
+                  <%= link_to 'Show', topic_article_path(@topic, article), class:"text-indigo-600 hover:text-indigo-900" %>
+                  <%= link_to 'Edit', edit_topic_article_path(@topic, article), class:"text-indigo-600 hover:text-indigo-900" %>
+                  <%= link_to 'Delete', topic_article_path(@topic, article), class:"text-indigo-600 hover:text-indigo-900", method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
