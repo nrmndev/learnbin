@@ -81,3 +81,6 @@ gem 'kramdown-parser-gfm'
 
 # Works even nested HTML, caveat: data must be HTML not Markdown
 gem 'highlightjs-rails'
+gem 'acts_as_list'
+gem 'devise'
+gem "phosphor_icons"

@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
     @article = @topic.articles.new
   end
 
+
   def create
     @article = @topic.articles.new(article_params)
     if @article.save

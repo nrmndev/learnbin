@@ -17,6 +17,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = @category.topics.new(topic_params)
+    @topic.user = current_user
     if @topic.save
       redirect_to dashboard_category_path(@topic.category), notice: "Topic created!"
     else
@@ -61,6 +62,6 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:name, :slug, :description, :category_id)
+    params.require(:topic).permit(:name, :slug, :description, :category_id, :visibility)
   end
 end

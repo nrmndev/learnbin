@@ -1,5 +1,6 @@
 module Dashboard
   class CategoriesController < ApplicationController
+    before_action :authenticate_user!
     # /dashboard/categories
     def index
       @categories = Category.all

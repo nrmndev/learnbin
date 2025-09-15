@@ -1,1 +1,49 @@
 @import "tailwindcss";
+
+.wysiwyg-content {
+  @apply grid gap-3;
+}
+.wysiwyg-content ul,
+.wysiwyh-content ol {
+  @apply space-y-1 text-gray-800 list-disc list-inside;
+}
+
+.wysiwyg-content h1 {
+  @apply text-3xl;
+}
+
+.wysiwyg-content h2,
+.wysiwyg-content h3,
+.wysiwyg-content h4 {
+  @apply text-2xl;
+}
+
+.wysiwyg-content h5 {
+  @apply text-xl;
+}
+
+.wysiwyg-content table {
+  @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+}
+
+.wysiwyg-content thead {
+  @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+}
+
+.wysiwyg-content th {
+  @apply px-6 py-3;
+}
+
+.wysiwyg-content tbody {
+  @apply border-b  dark:border-gray-700 border-gray-200;
+}
+
+.wysiwyg-content tbody tr td {
+  @apply px-2 py-3;
+}
+.wysiwyg-content tbody tr:nth-child(odd) {
+  @apply bg-white;
+}
+.wysiwyg-content tbody tr:nth-child(even) {
+  @apply bg-gray-100;
+}

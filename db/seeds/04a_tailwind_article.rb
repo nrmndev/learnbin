@@ -19,15 +19,15 @@ npm create vite@latest my-project
 cd my-project
 ```
 '
-article = topic.articles.create!(title: 'Installation', slug: 'installation', summary: summary)
+article = topic.articles.create!(title: 'Installation', slug: 'installation', summary: summary, visibility: 0)
 
 pp "Creating 'sections' for 'installation' for TailwindCSS"
 # Add sections to the article
-article.sections.create!(heading: 'Using Vite', content: 'Lorem ipsum...Using Vite')
-article.sections.create!(heading: 'Using PostCSS', content: 'Lorem ipsum...Using PostCSS')
-article.sections.create!(heading: 'Tailwind CLI', content: 'Lorem ipsum...Tailwind CLI')
-article.sections.create!(heading: 'Framework Guides', content: 'Lorem ipsum...Framework Guides')
-article.sections.create!(heading: 'Play CDN', content: 'Lorem ipsum...Play CDN')
+article.sections.create!(heading: 'Using Vite', content: 'Lorem ipsum...Using Vite', position: 1, visibility: 0)
+article.sections.create!(heading: 'Using PostCSS', content: 'Lorem ipsum...Using PostCSS', position: 2, visibility: 0)
+article.sections.create!(heading: 'Tailwind CLI', content: 'Lorem ipsum...Tailwind CLI', position: 3, visibility: 0)
+article.sections.create!(heading: 'Framework Guides', content: 'Lorem ipsum...Framework Guides', position: 4, visibility: 0)
+article.sections.create!(heading: 'Play CDN', content: 'Lorem ipsum...Play CDN', position: 5, visibility: 0)
 
 
-article = topic.articles.create!(title: 'Official Documentation', slug: 'official-documentation')
+article = topic.articles.create!(title: 'Official Documentation', slug: 'official-documentation', visibility: 0)

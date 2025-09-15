@@ -1,6 +1,8 @@
 class SectionsController < ApplicationController
   before_action :set_article
   before_action :set_section, only: %i[show edit update destroy]
+  before_action :set_prev, only: %i[show]
+  before_action :set_next, only: %i[show]
 
   def index
     @sections = @article.sections
@@ -36,6 +38,7 @@ class SectionsController < ApplicationController
     redirect_to article_sections_path(@article), notice: "Section deleted!"
   end
 
+
   private
 
   def set_article
@@ -48,5 +51,14 @@ class SectionsController < ApplicationController
 
   def section_params
     params.require(:section).permit(:heading, :content, :position)
+  end
+
+  def set_prev
+    @prev_section = @section.higher_item
+  end
+
+  # Get the section with ID greater than current, the closest one
+  def set_next
+    @next_section = @section.lower_item
   end
 end

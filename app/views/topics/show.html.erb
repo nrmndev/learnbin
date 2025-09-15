@@ -1,13 +1,18 @@
 
 
-<%= render "page_heading"  %>
+<%= render "shared/page_heading", heading: @topic.name  %>
 <div class="grid grid-cols-4 gap-3 p-4">
   <div class="col-span-1">
     <%= render "sidebar", topic: @topic %>
   </div>
   <div class="col-span-3">
     <%= turbo_frame_tag "article_frame" do %>
-      <%= render "content"  %>
+      <%= sanitize(
+      highlight_code(@topic.description),
+      tags: %w[div span button pre code br table tbody th tr td ul ol li h2 h3 em ],
+      attributes: %w[class data-controller data-action data-lang]
+    )
+%>
 
     <% end %>
   </div>

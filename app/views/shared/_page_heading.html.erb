@@ -1,0 +1,10 @@
+<%# locals: (heading: []) -%>
+<div class="relative w-full h-32 min-h-[100px] flex justify-center items-center">  <!-- container -->
+  <img src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a" alt="Background image"
+       class="w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-black/50"></div>  <!-- overlay -->
+  <div class="absolute inset-0 flex items-center justify-center text-white">
+    <!-- content over image + overlay -->
+    <h1 class="text-4xl text-white"><%= heading  %></h1>
+  </div>
+</div>

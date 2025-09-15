@@ -1,5 +1,6 @@
 module Dashboard
   class ArticlesController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_topic, only: %i[index show]
     before_action :set_category, only: %i[index show]
     before_action :set_articles, only: %i[index show]

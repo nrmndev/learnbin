@@ -1,25 +1,25 @@
-<h1>Dashboard</h1>
+<div class="container mx-auto">
 
+  <div class="grid grid-cols-3 gap-3">
+  <% @categories.each do |category|  %>
 
-<div class="grid grid-cols-4 gap-3 p-4">
-  <div class="col-span-1">
-  <nav aria-label="Sidebar" class="flex flex-1 flex-col">
-  <ul role="list" class="-mx-2 space-y-1">
-    <li>
-    <% @topics.each do |topic|  %>
-      <%= link_to topic.name, topic_articles_path(topic), class:"group flex gap-x-3 rounded-md bg-gray-50 p-2 text-sm/6 font-semibold text-indigo-600" , data: { turbo_frame: "dashboard_article_list" }%>
-    <% end  %>
-      <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
-    </li>
-  </ul>
-</nav>
+      <%# locals: (heading: "", link: "") -%>
 
+  <div class="overflow-hidden rounded-lg bg-white shadow-sm">
+      <div class="px-2 py-3 sm:p-3">
+        <!-- Content goes here -->
+        <div class="grid gap-3">
+          <%= category.name  %>
+          <ul>
+          <% category.topics.each do |topic| %>
+            <li><%= link_to topic.name, category_topic_path(topic.category_id, topic.id)  %></li>
+          <% end  %>
+          </ul>
 
-
-  </div>
-  <div class="col-span-3">
-    <%= turbo_frame_tag "dashboard_article_list" do %>
-      <%= render 'dashboard/article_list', articles: @articles %>
-    <% end %>
-  </div>
+          </div>
+        </div>
+      </div>
+    <%#= render "shared/card",  heading: topic.name, link: category_topic_path(topic.category_id, topic) %>
+  <% end %>
+    </div>
 </div>

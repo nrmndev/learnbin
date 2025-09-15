@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to dashboard_categories_path, notice: "Category created!"
+      #redirect_to dashboard_categories_path, notice: "Category created!"
     # use notice
     # validate later
       # else

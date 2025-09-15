@@ -1,13 +1,27 @@
 <%= turbo_frame_tag "article_frame" do %>
-<h1><%= @section.heading %></h1>
-<p><strong>Content:</strong></p>
-<%# highlight_code(@section.content) %>
-<p><%= sanitize(
+  <div class="grid gap-3">
+    <h2 class="text-3xl"><%= @section.heading %></h2>
+    <%= sanitize(
       highlight_code(@section.content),
-      tags: %w[div span button pre code br],
-      attributes: %w[class data-controller data-action data-lang]
-    )
-%></p>
+          tags: %w[div span button pre code br table tbody td ul ol li h2 h3 em tr],
+          attributes: %w[class data-controller data-action data-lang]
+        )
+    %>
+  </div>
+  <div class="grid grid-cols-2 gap-5 p-5">
+  <% if @prev_section %>
+    <%= link_to topic_article_section_path(@prev_section.article.topic_id, @prev_section.article_id, @prev_section.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2", data: { turbo_frame: "article_frame" } do %>
+      <span>← Previous </span>
+      <span><%= @prev_section.heading %></span>
+    <% end %>
+  <% end %>
 
+  <% if @next_section %>
+    <%= link_to topic_article_section_path(@next_section.article.topic_id, @next_section.article_id, @next_section.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2 text-right", data: { turbo_frame: "article_frame" } do %>
+      <span>Next →</span>
+      <span><%= @next_section.heading %></span>
+    <% end %>
+  <% end %>
+  </div>
 <% end %>
 <%# link_to 'Back to Sections', article_sections_path(@article) %>

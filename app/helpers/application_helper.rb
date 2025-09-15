@@ -61,7 +61,11 @@ module ApplicationHelper
       build_code_block(inner, lang, attrs_override: attrs, escape_already_done: true)
     end
 
-    html.html_safe
+    wrapped = content_tag(:div, class: "wysiwyg-content") do
+      html.html_safe
+    end
+
+    wrapped
   end
 
   private

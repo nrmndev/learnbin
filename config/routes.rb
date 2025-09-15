@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   get 'articles/index'
   get 'articles/show'
   get 'articles/new'
@@ -31,11 +33,27 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :discover do
+    resources :categories do
+      resources :topics do
+        resources :articles do
+          resources :sections do
+          end
+        end
+      end
+    end
+  end
+
   namespace :dashboard do
     resources :categories do
       resources :topics do
         resources :articles do
-          resources :sections
+          resources :sections do
+            member do
+              patch :move_up
+              patch :move_down
+            end
+          end
         end
       end
     end

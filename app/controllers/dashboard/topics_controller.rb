@@ -1,5 +1,6 @@
 module Dashboard
   class TopicsController < ApplicationController
+    before_action :authenticate_user!
     # /dashboard/topics
     def index
       @topics = Topic.all
