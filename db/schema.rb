@@ -65,14 +65,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_170721) do
     t.string "title", null: false
     t.text "slug"
     t.text "description"
-    t.bigint "topic_id", null: false
     t.bigint "user_id", null: false
     t.integer "position"
     t.integer "visibility", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_posts_on_slug"
-    t.index ["topic_id"], name: "index_posts_on_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -139,7 +137,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_170721) do
   add_foreign_key "collections", "users"
   add_foreign_key "parts", "posts"
   add_foreign_key "parts", "users"
-  add_foreign_key "posts", "topics"
   add_foreign_key "posts", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "topics", "users"

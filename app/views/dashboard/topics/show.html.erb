@@ -7,21 +7,16 @@
 
     <div class="flex justify-start">
       <h2 class="text-white mt-3 text-3xl grow"><%= @topic.title  %></h2>
-      <button command="show-modal" commandfor="dialog" class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border border-white cursor-pointer">
-        <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
-          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-        </svg>
-        Add Post to <%= @topic.title  %>
-      </button>
     </div>
   </div>
 </div>
 
+<%= simple_form_for @topic, url: dashboard_topic_path(@topic) do |f| %>
 <div class="container mx-auto">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
     <div class="col-span-2">
       <div class="p-4">
-        <%= simple_form_for @topic do |f| %>
+
           <%= f.input :title %>
           <%= f.input :slug %>
           <%= f.input :visibility, as: :select,
@@ -34,39 +29,47 @@
           </div>
           <%#  f.input :category_id,  collection: Category.all, label_method: :name, include_blank: false %>
           <%= f.submit class: "cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-        <% end %>
+
         </div>
     </div>
-    <div class="col-span-1 p-5 rounded-sm bg-[#f6f6f6]">
-      <h2><%= @topic.title  %> Posts</h2>
-      <ul role="list" class="mt-3 grid grid-cols-1 gap-5">
-        <% @posts.each do |post|  %>
-        <li class="col-span-1 flex rounded-md shadow-xs">
-          <%# <div class="flex w-16 shrink-0 items-center justify-center rounded-l-md bg-pink-600 text-sm font-medium text-white">GA</div> %>
-          <div class="flex flex-1 items-center justify-between truncate rounded-r-md border border-gray-200 bg-white">
-            <div class="flex-1 truncate px-4 py-2 text-sm">
-              <%= link_to post.title, dashboard_topic_post_path(@topic, post), class:"font-medium text-gray-900 hover:text-gray-600"%>
+    <div class="col-span-1 flex flex-col gap-3 bg-white">
+      <div class="bg-[#f6f6f6] p-5 rounded-sm">
+        Attach to collection:
+          <%= f.collection_check_boxes :collection_ids, Collection.all, :id, :title do |cb| %>
+            <div class="flex items-center space-x-2">
+              <%= cb.check_box %>
+              <%= cb.label class:"font-medium text-gray-900" %>
+              <%= link_to dashboard_collection_path(cb.value), class:"inline-flex shrink-0 items-center rounded-full bg-white px-1.5 py-0.5 text-xs font-medium  inset-ring inset-ring-blue-500" do %>
+                <%= phosphor_icon "arrow-u-up-right", class: "h-4 w-4 text-blue-500" %>
+              <% end %>
             </div>
-            <div class="shrink-0 pr-2">
-              <button type="button" class="inline-flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600">
-                <span class="sr-only">Open options</span>
-                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
-                  <path d="M10 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM10 8.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM11.5 15.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </li>
-        <% end  %>
-      </ul>
+          <% end %>
+      </div>
+      <div class="bg-[#f6f6f6] p-5 rounded-sm">
+        Associated Posts
+        <ul>
+          <li>Sample Post</li>
+        </ul>
+      </div>
+    <%# END OF SIDE BAR%>
     </div>
   </div>
-</div>
-
+<% end %>
   <%= render 'shared/modal' do %>
-    <%= render 'dashboard/posts/form'  %>
+    <%# render 'dashboard/posts/form'  %>
   <% end %>
 
+<%#
+        <div class="flex gap-3 items-center">
+          <div class="group grid size-4 grid-cols-1">
+            <input id="comments" type="checkbox" name="comments" checked aria-describedby="comments-description" class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
+            <svg viewBox="0 0 14 14" fill="none" class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25">
+              <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-checked:opacity-100" />
+              <path d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-indeterminate:opacity-100" />
+            </svg>
+          </div>
+          <label for="comments" class="font-medium text-gray-900">Ruby on Rails</label>
+        </div> %>
 <!--
     <nav aria-label="Breadcrumb" class="flex">
       <ol role="list" class="flex items-center space-x-4">

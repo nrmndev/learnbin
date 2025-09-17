@@ -13,25 +13,24 @@ module Dashboard
 
   def move_up
     @parts.move_higher
-    redirect_back(fallback_location: dashboard_topic_post_path(@post), notice: "Section moved up")
+    redirect_back(fallback_location: dashboard_post_path(@post), notice: "Section moved up")
   end
 
   def move_down
     @parts.move_lower
-    redirect_back(fallback_location: dashboard_topic_post_path(@post), notice: "Section moved down")
+    redirect_back(fallback_location: dashboard_post_path(@post), notice: "Section moved down")
   end
 
   def destroy
     @parts.destroy
     respond_to do |format|
-      format.html { redirect_to dashboard_topic_post_path(@post), notice: 'Article was successfully deleted.' }
+      format.html { redirect_to dashboard_post_path(@post), notice: 'Article was successfully deleted.' }
       format.json { head :no_content }
     end
   end
     private
     def set_part
-      @topic = Topic.find(params[:topic_id])
-      @post = @topic.posts.find(params[:post_id])
+      @post = Post.find(params[:post_id])
       @parts = @post.parts.find(params[:id])
       @part = Part.find(params[:id])
     end

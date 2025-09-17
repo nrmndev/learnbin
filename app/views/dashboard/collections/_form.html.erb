@@ -1,0 +1,7 @@
+<%= simple_form_for @collection, url: dashboard_collection_path(@collection) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :slug %>
+  <%= f.input :visibility, as: :select,
+    collection: Collection.visibilities.keys.map { |k| [k.humanize.capitalize, k] },  include_blank: false%>
+  <%= f.submit %>
+<% end %>

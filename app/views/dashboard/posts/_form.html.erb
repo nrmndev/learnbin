@@ -1,6 +1,6 @@
 
 
-<%= simple_form_for [@topic, @post] do |f| %>
+<%= simple_form_for @post, url: dashboard_post_path(@post) do |f| %>
  <div class="col-span-full">
     <%# <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Title</label> %>
     <div class="mt-2">

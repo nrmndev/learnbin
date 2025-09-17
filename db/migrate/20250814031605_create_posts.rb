@@ -4,7 +4,6 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.string :title, null: false
       t.text :slug
       t.text :description
-      t.references :topic, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.integer :position
       t.integer :visibility, default: 1

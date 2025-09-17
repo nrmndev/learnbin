@@ -1,0 +1,36 @@
+Route: http://localhost:3000/dashboard
+Controller: Dashboard#index
+ - Make vertical menu
+ - each link fires turbo_frames
+    collections: dashboard/collections/index+turbo.html.erb
+    topics: views -> dashboard/topics/index+turbo.html.erb
+    posts: views -> dashboard/posts/index+turbo.html.erb
+
+Route: http://localhost:3000/dashboard/collections/1
+Controller: Dashboard::Collections#show
+ - update form style
+ - update topic collection UI
+
+Route: http://localhost:3000/dashboard/topics/:id
+Controller: Dashboard::Topics#show
+ - Finalize Attach to collection
+ - Finalize UI for Posts in this Topic
+
+Route: http://localhost:3000/dashboard/posts
+Controller: Dashboard::Posts#index
+ - Convert to actual data
+ - Finalize UI
+ - Create Post redirect to http://localhost:3000/dashboard/posts/new?
+
+Route: http://localhost:3000/dashboard/posts/:id
+Controller: Dashboard::Posts#show
+ - Visibility Missing
+ - Add to topics feature
+ - Finalize UI
+ - Create Post redirect to http://localhost:3000/dashboard/posts/new?
+
+
+TAG and Category Association
+
+
+FRONT-End views to follow

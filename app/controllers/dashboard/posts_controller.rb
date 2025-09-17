@@ -1,30 +1,45 @@
 module Dashboard
   class PostsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_topic, only: %i[index show]
-    before_action :set_category, only: %i[index show]
-    before_action :set_posts, only: %i[index show]
-    # /dashboard/topics/:id/articles
+    # before_action :set_topic, only: %i[index show]
+    # before_action :set_category, only: %i[index show]
+    before_action :set_posts, only: %i[index]
+    before_action :set_post, only: %i[show update]
+
     def index
     end
 
-    #/dashboard/topics/3
+
     def show
-      @post = @posts.find(params[:id])
+      @post = Post.find(params[:id])
       @part = Part.new
     end
 
+
+    def update
+      #@post.update!(post_params)
+      #redirect_to dashboard_post_path(@post), notice: "part updated!"
+      if @post.update!(post_params)
+        redirect_to dashboard_post_path(@post), notice: "part updated!"
+      end
+    end
+
+    def new
+      @post = Post.new
+    end
+
     private
-    def set_topic
-      @topic = Topic.find(params[:topic_id])
+
+    def post_params
+      params.require(:post).permit(:title, :slug, :description)
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
     end
 
     def set_posts
-      @posts = @topic.posts
-    end
-
-    def set_category
-      # @category = @topic.category
+      @posts = Post.all
     end
   end
 end

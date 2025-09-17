@@ -1,0 +1,44 @@
+<div class="bg-indigo-600 p-5 -mb-[50px] min-h-[150px]">
+  <div class="container mx-auto">
+    <div class="flex justify-start">
+      <h2 class="text-white mt-3 text-3xl grow"><%= @collection.title  %></h2>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+    <div class="col-span-2">
+      <div class="p-4">
+        <%= render "form"  %>
+      </div>
+    </div>
+    <div class="col-span-1 flex flex-col gap-3 bg-white">
+      <div class="bg-[#f6f6f6] p-5 rounded-sm">
+        <h3>Topics in this Collection</h3>
+        <%#= @topics_for_sidebar.inspect  %>
+
+        <% @collection.topics.each do |topic|  %>
+          <%= topic.position  %>
+        <% end %>
+        <ul role="list" class="mt-3 grid grid-cols-1 gap-5 ">
+          <% @topics_for_sidebar.order(:position).includes(:topic).each do |ct| %>
+            <li>
+              <%= link_to ct.topic.title, dashboard_topic_path(ct.topic) %>
+              <% if ct.position.present? && ct.position > 1 %>
+                <%= button_to "↑", move_up_dashboard_collection_collection_topic_path(@collection, ct), method: :patch %>
+              <% end %>
+              <% max = @collection.collection_topics.maximum(:position) %>
+              <% if ct.position.present? && ct.position < max %>
+                <%= button_to "↓", move_down_dashboard_collection_collection_topic_path(@collection, ct), method: :patch %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+        <hr>
+        <p>To include/exclude a topic, go to topics edit</p>
+      </div>
+    </div>
+  </div>
+</div>

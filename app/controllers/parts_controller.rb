@@ -18,7 +18,7 @@ class PartsController < ApplicationController
     @part = @post.parts.new(part_params)
     @part.user_id = current_user.id
     if @part.save
-      redirect_to dashboard_topic_post_path(@part.post.topic_id, @part.post_id), notice: "part created!"
+      redirect_to dashboard_post_path(@part.post_id), notice: "part created!"
     else
       render :new
     end
@@ -28,7 +28,7 @@ class PartsController < ApplicationController
 
   def update
     if @part.update(part_params)
-      redirect_to [@post.topic, @post, @part], notice: "part updated!"
+      redirect_to dashboard_post_part_path(@part.post_id), notice: "part updated!"
     else
       render :edit
     end

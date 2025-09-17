@@ -1,15 +1,12 @@
 norman = User.find_by(email: 'nrmndev@gmail.com')
-collection = Collection.find_by(title:"Ruby on Rails")
+collection = Collection.find_by(title: 'Next JS')
 category = Category.find_by(title: 'Programming', slug: 'programming')
-pp 'Creating Ruby on Rails topic'
+pp 'Creating NextJS topic'
 # Add topics to it
-topic = Topic.new(title: 'Ruby on Rails Installation', slug: 'ruby-on-rails-installation', user: norman, visibility: 0)
+topic = Topic.new(title: 'NextJS Installation', slug: 'nextjs-installation', user: norman, visibility: 0)
 topic.user_id = norman.id
 topic.save!
 
-topic_2 = Topic.new(title: 'Useful Gems', slug: 'useful-gems', user: norman, visibility: 0)
-topic_2.user_id = norman.id
-topic_2.save!
 
 # Associate topic to collection_topic
 CollectionTopic.create!(
@@ -18,20 +15,14 @@ CollectionTopic.create!(
   position: 1
 )
 
-CollectionTopic.create!(
-  collection_id: collection.id,
-  topic_id: topic_2.id,
-  position: 2
-)
+pp "Creating 'installation' part for NextJS"
 
-pp "Creating 'installation' article for Ruby on rails"
-# Add articles to that topic
-post = Post.new(title: 'Installation', slug: 'installation', visibility: 0)
+post = Post.new(title: 'via NPM', slug: 'installation', visibility: 0)
 # post.topic_id = topic.id
 post.user_id = topic.user_id
 post.save!
 
-pp "Creating 'sections' for 'installation' for Ruby on rails"
+pp "Creating 'parts' for 'installation' for NextJS"
 # Add sections to the article
 part = Part.new(title: 'Download instructions', description: 'Lorem ipsum...', visibility: 0)
 part.post_id = post.id

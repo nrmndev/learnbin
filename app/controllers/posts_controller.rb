@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_topic
+  # before_action :set_topic
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
@@ -14,11 +14,11 @@ class PostsController < ApplicationController
 
 
   def create
-    @post = @topic.posts.new(post_params)
+    @post = Post.new(post_params)
     @post.user_id = current_user.id
 
     if @post.save!
-      redirect_to dashboard_topic_path(@topic), notice: "post created!"
+      redirect_to dashboard_posts_path, notice: "post created!"
 
     end
   end
@@ -26,26 +26,23 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
-    if @post.update(post_params)
-      redirect_to [@topic, @post], notice: "post updated!"
-    else
-      render :edit
-    end
+    @post.update!(post_params)
+    redirect_to dashboard_post_path(@post), notice: "post updated!"
+    # if @post.update!(post_params)
+    #   redirect_to dashboard_post_path(@post), notice: "post updated!"
+    # end
   end
 
   def destroy
     @post.destroy
-    redirect_to topic_posts_path(@topic), notice: "post deleted!"
+    redirect_to dashboard_posts_path, notice: "post deleted!"
   end
 
   private
 
-  def set_topic
-    @topic = Topic.find(params[:topic_id])
-  end
 
   def set_post
-    @post = @topic.posts.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params

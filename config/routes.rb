@@ -27,11 +27,11 @@ Rails.application.routes.draw do
     resources :topics
   end
 
-  resources :topics do
-    resources :posts do
-      resources :parts
-    end
+
+  resources :posts do
+    resources :parts
   end
+
 
   resources :discover do
     resources :categories do
@@ -45,19 +45,27 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
+    resources :collections do
+      resources :collection_topics do
+      member do
+        patch :move_up
+        patch :move_down
+      end
+    end
 
-      resources :topics do
-        resources :posts do
-          resources :parts do
-            member do
-              patch :move_up
-              patch :move_down
-            end
-          end
+    end
+    resources :topics do
+
+    end
+
+    resources :posts do
+      resources :parts do
+        member do
+          patch :move_up
+          patch :move_down
         end
       end
-
-
+    end
     # this gives: GET /dashboard/topics → dashboard/topics#index
     # and the rest of CRUD: show, new, edit, update, destroy
   end

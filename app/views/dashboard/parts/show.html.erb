@@ -1,8 +1,7 @@
 <div class="bg-indigo-600 p-5 -mb-[50px] min-h-[150px]">
   <div class="container mx-auto">
     <%= render "shared/breadcrumbs", links: [
-      { text: @part.post.topic.title, url: dashboard_topic_path(@part.post.topic_id)  },
-      { text: @part.post.title, url: dashboard_topic_post_path(@part.post.topic_id, @part.post_id)  },
+      { text: @part.post.title, url: dashboard_post_path(@part.post_id)  },
       { text: @part.title }
       ]
     %>
@@ -11,7 +10,7 @@
   </div>
 </div>
 <div class="container mx-auto">
-  <%= simple_form_for [@topic, @post, @part] do |f| %>
+  <%= simple_form_for [@post, @part] do |f| %>
     <%= f.input :title %>
     <div class="rounded-md bg-white px-3 pt-2.5 pb-1.5 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 mb-2 string optional topic_name">
       <label class="block text-xs font-medium text-gray-900 string optional block text-sm/6 font-medium text-gray-900 mb-2" for="topic_name">Description</label>
