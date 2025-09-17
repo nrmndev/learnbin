@@ -16,10 +16,10 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = @category.topics.new(topic_params)
+    @topic = Topic.new(topic_params)
     @topic.user = current_user
     if @topic.save
-      redirect_to dashboard_category_path(@topic.category), notice: "Topic created!"
+      redirect_to dashboard_topic_path(@topic.category), notice: "Topic created!"
     else
       render :new
     end

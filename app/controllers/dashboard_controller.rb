@@ -2,9 +2,8 @@
   class DashboardController < ApplicationController
 
     def index
-      @categories = Category.all
+      @collections = Collection.all
       @topics = Topic.all
-      @articles = Article.none
     end
     # def topics
     #   @topics = Topic.all

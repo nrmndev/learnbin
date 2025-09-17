@@ -1,21 +1,18 @@
 <div class="container mx-auto">
 
   <div class="grid grid-cols-3 gap-3">
-  <% @categories.each do |category|  %>
-
+  <% @collections.each do |collection|  %>
       <%# locals: (heading: "", link: "") -%>
-
   <div class="overflow-hidden rounded-lg bg-white shadow-sm">
       <div class="px-2 py-3 sm:p-3">
         <!-- Content goes here -->
         <div class="grid gap-3">
-          <%= category.name  %>
+          <%= collection.title  %>
           <ul>
-          <% category.topics.each do |topic| %>
-            <li><%= link_to topic.name, category_topic_path(topic.category_id, topic.id)  %></li>
+          <% collection.topics.each do |topic| %>
+            <li><%= link_to topic.title, topic_path(topic.category_id, topic.id)  %></li>
           <% end  %>
           </ul>
-
           </div>
         </div>
       </div>

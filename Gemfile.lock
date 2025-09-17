@@ -78,6 +78,9 @@ GEM
       mutex_m
       securerandom (>= 0.3)
       tzinfo (~> 2.0)
+    acts-as-taggable-on (12.0.0)
+      activerecord (>= 7.1, < 8.1)
+      zeitwerk (>= 2.4, < 3.0)
     acts_as_list (1.2.4)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
@@ -327,6 +330,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  acts-as-taggable-on
   acts_as_list
   bootsnap
   capybara
