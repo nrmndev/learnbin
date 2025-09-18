@@ -47,3 +47,14 @@
 .wysiwyg-content tbody tr:nth-child(even) {
   @apply bg-gray-100;
 }
+
+/*** HEADING ***/
+.heading-underlined {
+  @apply relative border-b border-gray-200 mb-5 pb-2 text-xl font-semibold text-gray-700;
+}
+.heading-underlined:before {
+  content: "";
+  bottom: -1px;
+  left: 0;
+  @apply absolute w-15 h-[1px] bg-indigo-600;
+}
