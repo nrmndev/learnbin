@@ -1,7 +1,7 @@
 <%= simple_form_for @collection, url: dashboard_collection_path(@collection) do |f| %>
   <%= f.input :title %>
   <%= f.input :slug %>
-  <%= f.input :visibility, as: :select,
-    collection: Collection.visibilities.keys.map { |k| [k.humanize.capitalize, k] },  include_blank: false%>
-  <%= f.submit %>
+  <%= render "dashboard/shared/form_field_visibility", f:f  %>
+  <%= render "dashboard/shared/form_field_description", f:f  %>
+  <%= f.submit class: "btn-primary" %>
 <% end %>

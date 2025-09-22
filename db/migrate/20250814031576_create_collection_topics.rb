@@ -8,6 +8,6 @@ class CreateCollectionTopics < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :collection_topics, [:collection_id, :topic_id], unique: true
+    add_index :collection_topics, [:collection_id, :topic_id]
   end
 end

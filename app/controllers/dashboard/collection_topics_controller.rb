@@ -1,5 +1,5 @@
 module Dashboard
-  class CollectionTopicsController < ApplicationController
+  class CollectionTopicsController < Dashboard::BaseController
     before_action :set_collection
 
     def move_up

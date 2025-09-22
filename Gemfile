@@ -85,3 +85,5 @@ gem 'acts_as_list'
 gem 'devise'
 gem "phosphor_icons"
 gem 'acts-as-taggable-on'
+
+gem 'faker'

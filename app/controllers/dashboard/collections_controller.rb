@@ -1,11 +1,15 @@
 module Dashboard
-  class CollectionsController < ApplicationController
+  class CollectionsController < Dashboard::BaseController
     before_action :authenticate_user!
     before_action :set_collection, only: %i[show update]
     # /dashboard/topics
     def index
       # @topics = Topic.all
       # @posts = Post.none
+      @grouped_cts = CollectionTopic.includes(:topic).all.group_by(&:collection_id)
+      # Optionally load collections so you can show collection titles
+      @collections = Collection.where(id: @grouped_cts.keys).index_by(&:id)
+      @topics = Topic.all
     end
 
     def show; end
@@ -27,7 +31,11 @@ module Dashboard
 
     def update
       if @collection.update(collection_params)
-        redirect_to dashboard_collection_path(@collection), notice: "part updated!"
+        flash.now[:notice] = "Collection updated successfully!"
+        render turbo_stream: [
+          turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @collection.title }),
+          turbo_stream.append("flash", partial: "layouts/flash")
+        ]
       else
         render :edit
       end
@@ -38,24 +46,24 @@ module Dashboard
     end
 
 
-    def move_up
-      @collection_topic = @collection.collection_topics.find(params[:id])
-      @collection_topic.move_higher
-      debugger
-      redirect_to collection_path(@collection)
-    end
+    # def move_up
+    #   @collection_topic = @collection.collection_topics.find(params[:id])
+    #   @collection_topic.move_higher
+    #   debugger
+    #   redirect_to collection_path(@collection)
+    # end
 
-    def move_down
-      @collection_topic = @collection.collection_topics.find(params[:id])
-      @collection_topic.move_lower
-      redirect_to collection_path(@collection)
-    end
+    # def move_down
+    #   @collection_topic = @collection.collection_topics.find(params[:id])
+    #   @collection_topic.move_lower
+    #   redirect_to collection_path(@collection)
+    # end
 
     private
 
     def set_collection
-      #@collection = Collection.find(params[:id])
-      @collection = Collection.includes(:topics).find(params[:id])
+      @user_collection = Collection.where(user: current_user)
+      @collection = @user_collection.includes(:topics).find(params[:id])
       # optional: maybe only visible topics, or some scope
       @topics_for_sidebar = @collection.collection_topics
     end

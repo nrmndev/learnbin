@@ -1,10 +1,10 @@
 module Dashboard
-  class TopicsController < ApplicationController
+  class TopicsController < Dashboard::BaseController
     before_action :authenticate_user!
     before_action :set_topic, only: %i[show update]
+    before_action :set_topics, only: %i[index]
     # /dashboard/topics
     def index
-      @topics = Topic.all
       @posts = Post.none
     end
 
@@ -23,9 +23,20 @@ module Dashboard
       end
     end
 
+    def destroy
+      @topic = Topic.find(params[:id])
+      @topic.destroy!
+      redirect_to dashboard_topics_path, notice: "Topic deleted!"
+    end
+
+
     def update
       if @topic.update(topic_params)
-        redirect_to dashboard_topic_path(@topic), notice: "part updated!"
+        flash.now[:notice] = "Topic updated successfully!"
+        render turbo_stream: [
+          turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @topic.title }),
+          turbo_stream.append("flash", partial: "layouts/flash")
+        ]
       else
         render :edit
       end
@@ -35,13 +46,30 @@ module Dashboard
       @topic = Topic.find(params[:id])
     end
 
+    def move_up
+      ct = @collection.collection_topics.find(params[:id])
+      ct.move_higher
+      redirect_to dashboard_collection_path(@collection)  # sends back to the collection#show page
+    end
+
+    def move_down
+      ct = @collection.collection_topics.find(params[:id])
+      ct.move_lower
+      redirect_to dashboard_collection_path(@collection)
+    end
 
     private
 
     def set_topic
-      @topic = Topic.find(params[:id])
+      # Check relavance
+      # @collections = Collection.includes(:topics).all
 
-      @collections = Collection.all
+      @topic = Topic.includes(:posts).find(params[:id])
+      @posts_for_sidebar = @topic.topic_posts
+    end
+
+    def set_topics
+      @topics = Topic.where(user: current_user)
     end
 
     def topic_params

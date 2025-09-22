@@ -8,29 +8,25 @@ Controller: Dashboard#index
 
 Route: http://localhost:3000/dashboard/collections/1
 Controller: Dashboard::Collections#show
- - update form style
- - update topic collection UI
 
 Route: http://localhost:3000/dashboard/topics/:id
 Controller: Dashboard::Topics#show
- - Finalize Attach to collection
- - Finalize UI for Posts in this Topic
+PAUSE - finalize form (Tags?)
+PAUSE - Table Pagination and search filter
 
 Route: http://localhost:3000/dashboard/posts
 Controller: Dashboard::Posts#index
- - Convert to actual data
- - Finalize UI
- - Create Post redirect to http://localhost:3000/dashboard/posts/new?
+PAUSE - Create Post redirect to http://localhost:3000/dashboard/posts/new?
+PAUSE - Table Pagination and search filter
 
 Route: http://localhost:3000/dashboard/posts/:id
 Controller: Dashboard::Posts#show
- - Visibility Missing
- - Add to topics feature
- - Finalize UI
- - Create Post redirect to http://localhost:3000/dashboard/posts/new?
+PAUSE - Finalize Form (Tags?)
+PAUSE - Create Post redirect to http://localhost:3000/dashboard/posts/new?
 
 
-TAG and Category Association
-
-
-FRONT-End views to follow
+PAUSE - TAG and Category Association
+PRIORITY 1 - FRONT-End views to follow
+PRIORITY 2 - SIGN IN
+PRIORITY 3 - STATIC PROFILE (OR JUST UPDATE NICKNAME)
+PRIORITY 4 - DISCOVER

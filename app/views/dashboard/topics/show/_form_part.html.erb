@@ -1,0 +1,11 @@
+<%= f.input :title %>
+<%= f.input :slug %>
+<%= render "dashboard/shared/form_field_visibility", f:f  %>
+
+<div class="rounded-md bg-white px-3 pt-2.5 pb-1.5 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 mb-2 string optional topic_name">
+  <label class="block text-xs font-medium text-gray-900 string optional block text-sm/6 font-medium text-gray-900 mb-2" for="topic_name">Description</label>
+  <div data-controller="tinymce" class="mb-2">
+    <%= f.text_area :description, rows: 15, data: { tinymce_target: "textarea" } %>
+  </div>
+</div>
+<%= f.submit class: "btn-primary" %>

@@ -1,27 +1,29 @@
 <%= turbo_frame_tag "article_frame" do %>
   <div class="grid gap-3">
-    <h2 class="text-3xl"><%= @section.heading %></h2>
+    <h2 class="text-3xl"><%= @part.title %></h2>
     <%= sanitize(
-      highlight_code(@section.content),
+      highlight_code(@part.description),
           tags: %w[div span button pre code br table tbody td ul ol li h2 h3 em tr],
           attributes: %w[class data-controller data-action data-lang]
         )
     %>
   </div>
-  <div class="grid grid-cols-2 gap-5 p-5">
-  <% if @prev_section %>
-    <%= link_to topic_article_section_path(@prev_section.article.topic_id, @prev_section.article_id, @prev_section.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2", data: { turbo_frame: "article_frame" } do %>
-      <span>← Previous </span>
-      <span><%= @prev_section.heading %></span>
-    <% end %>
-  <% end %>
 
-  <% if @next_section %>
-    <%= link_to topic_article_section_path(@next_section.article.topic_id, @next_section.article_id, @next_section.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2 text-right", data: { turbo_frame: "article_frame" } do %>
-      <span>Next →</span>
-      <span><%= @next_section.heading %></span>
+    <div class="grid grid-cols-2 gap-5 p-5">
+    <% if @prev_part %>
+      <%= link_to topic_post_part_path(@prev_part.post.topics.first, @prev_part.post_id, @prev_part.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2", data: { turbo_frame: "article_frame" } do %>
+        <span>← Previous </span>
+        <span><%= @prev_part.title %></span>
+      <% end %>
     <% end %>
-  <% end %>
-  </div>
+
+    <% if @next_part %>
+      <%= link_to topic_post_part_path(@next_part.post.topics.first, @next_part.post, @next_part.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2 text-right", data: { turbo_frame: "article_frame" } do %>
+        <span>Next →</span>
+        <span><%= @next_part.title %></span>
+      <% end %>
+    <% end %>
+    </div>
+
 <% end %>
-<%# link_to 'Back to Sections', article_sections_path(@article) %>
+<%# link_to 'Back to parts', article_parts_path(@article) %>

@@ -1,54 +1,19 @@
-<div class="bg-indigo-600 p-5 -mb-[50px] min-h-[150px]">
+
+<div class="bg-indigo-600 p-5 mb-3">
   <div class="container mx-auto">
-    <div class="flex justify-start">
-      <h2 class="text-white mt-3 text-3xl grow">Posts</h2>
-      <%= link_to new_dashboard_post_path, class:"inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border border-white cursor-pointer"  do %>
-        <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
-          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-        </svg>
-        Create Post
-      <% end  %>
-    </div>
+      <%= render "shared/breadcrumbs", links: [
+      { text: "Dashboard", url: dashboard_path },
+      { text: "All Posts" }
+      ]
+    %>
+
+    <%= render "dashboard/shared/title", title: "Posts" %>
   </div>
 </div>
-<div class="px-4 sm:px-6 lg:px-8">
-  <div class="mt-8 flow-root">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-        <div class="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg">
-          <table class="relative min-w-full divide-y divide-gray-300">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
-                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Tags</th>
-                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Topic Association</th>
-                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
-              <% @posts.each do |post|  %>
-                <tr>
-                  <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6">
-                    <%= post.title  %>
-                  </td>
-                  <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6">
-                    Web Development, Ruby on rails
-                  </td>
-                  <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6">
-                    Ruby101, Ruby102
-                  </td>
-                  <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-6">
-                    <%= link_to dashboard_post_path(post.id), class: ""  do %>
-                      Edit
-                    <% end  %>
-                     | <%= button_to 'Delete', post_path(post.id), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "block px-3 py-1 text-sm/6 text-gray-900 focus:bg-gray-50 focus:outline-hidden" %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<div class="container mx-auto">
+  <%= link_to new_dashboard_post_path, class:"inline-flex items-center btn-primary"  do %>
+    <%= phosphor_icon "plus", class:"h-4 w-4 text-white"%> Create Post
+  <% end  %>
+  <%= render "dashboard/posts/index/table"  %>
 </div>

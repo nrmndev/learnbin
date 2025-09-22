@@ -1,0 +1,30 @@
+<div class="bg-white p-5 rounded-xl shadow">
+  <h3 class="heading-underlined">Topics in this Collection</h3>
+  <%#= @topics_for_sidebar.inspect  %>
+
+  <% @collection.topics.each do |topic|  %>
+    <%= topic.position  %>
+  <% end %>
+  <ul role="list" class="mt-3 grid grid-cols-1 gap-5 ">
+    <% @topics_for_sidebar.order(:position).includes(:topic).each do |ct| %>
+      <li class="col-span-1 flex rounded-md shadow-xs border border-gray-200 bg-neutral-50">
+        <div class="flex w-full items-center p-2">
+            <%= link_to ct.topic.title, dashboard_topic_path(ct.topic), class: "font-semibold text-sm text-gray-700 grow" %>
+            <% if ct.position.present? && ct.position > 1 %>
+              <%= button_to move_up_dashboard_collection_collection_topic_path(@collection, ct), method: :patch ,class: "p-2 bg-white shadow rounded-full" do %>
+                  <%= phosphor_icon "arrow-up", class: "h-5 w-5 text-blue-500" %>
+              <% end %>
+            <% end %>
+            <% max = @collection.collection_topics.maximum(:position) %>
+            <% if ct.position.present? && ct.position < max %>
+              <%= button_to move_down_dashboard_collection_collection_topic_path(@collection, ct), method: :patch,  class: "p-2 bg-white shadow rounded-full" do %>
+                  <%= phosphor_icon "arrow-down", class: "h-5 w-5 text-blue-500" %>
+              <% end %>
+            <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <p class="text-xs text-gray-600 mt-3">To include/exclude a topic, go to topics edit page</p>
+</div>

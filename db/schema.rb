@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_170721) do
     t.integer "visibility", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["collection_id", "topic_id"], name: "index_collection_topics_on_collection_id_and_topic_id", unique: true
+    t.index ["collection_id", "topic_id"], name: "index_collection_topics_on_collection_id_and_topic_id"
     t.index ["collection_id"], name: "index_collection_topics_on_collection_id"
     t.index ["topic_id"], name: "index_collection_topics_on_topic_id"
   end
@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_170721) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
-    t.text "slug"
+    t.string "slug"
     t.text "description"
     t.bigint "user_id", null: false
     t.integer "position"
@@ -105,6 +105,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_170721) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "topic_posts", force: :cascade do |t|
+    t.bigint "topic_id", null: false
+    t.bigint "post_id", null: false
+    t.integer "position"
+    t.integer "visibility", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_topic_posts_on_post_id"
+    t.index ["topic_id", "post_id"], name: "index_topic_posts_on_topic_id_and_post_id"
+    t.index ["topic_id"], name: "index_topic_posts_on_topic_id"
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string "title"
     t.string "slug"
@@ -139,5 +151,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_170721) do
   add_foreign_key "parts", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "topic_posts", "posts"
+  add_foreign_key "topic_posts", "topics"
   add_foreign_key "topics", "users"
 end

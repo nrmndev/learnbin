@@ -1,59 +1,65 @@
 
-
-<div class="bg-white">
-  <div class="bg-indigo-600 p-5 -mb-[50px] min-h-[150px]">
+<div class="bg-indigo-600 p-5 mb-3">
   <div class="container mx-auto">
-  <nav aria-label="Breadcrumb" class="flex">
-  <ol role="list" class="flex items-center space-x-4">
-    <li>
-      <div>
-        <a href="#" class="text-white hover:text-gray-100">
-          <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 shrink-0">
-            <path d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" fill-rule="evenodd" />
-          </svg>
-          <span class="sr-only">Home</span>
-        </a>
-      </div>
-    </li>
-    <li>
-      <div class="flex items-center">
-        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-gray-300">
-          <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-        </svg>
-        <span class="ml-4 text-sm font-medium text-white">Topics</span>
-      </div>
-    </li>
-  </ol>
-</nav>
-  <h2 class="text-white mt-3 text-3xl">Topics</h2>
-
+      <%= render "shared/breadcrumbs", links: [
+      { text: "Dashboard", url: dashboard_path },
+      { text: "All Topics" }
+      ]
+    %>
+    <%= render "dashboard/shared/title", title: "Topics" %>
   </div>
+</div>
+<%= turbo_frame_tag "dashboard_content" do %>
+<div class="xl:pl-72">
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div class="mt-8 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg">
+            <table class="relative min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Tags</th>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Attached to Collections</th>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white text-gray-700">
 
-  </div>
-  <div class="container mx-auto">
-    <div class="bg-white p-5">
-    <ul role="list" class="p-0 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-      <% @topics.each do |topic|  %>
-      <li class="col-span-1 flex rounded-md shadow-xs">
-        <%# <div class="flex w-16 shrink-0 items-center justify-center rounded-l-md bg-pink-600 text-sm font-medium text-white">GA</div> %>
-        <div class="flex flex-1 items-center justify-between truncate rounded-r-md border border-gray-200 bg-white">
-          <div class="flex-1 truncate px-4 py-2 text-sm">
-            <%= link_to topic.title, dashboard_topic_path(topic), class:"font-medium text-gray-900 hover:text-gray-600"%>
-
-          </div>
-          <div class="shrink-0 pr-2">
-            <button type="button" class="inline-flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600">
-              <span class="sr-only">Open options</span>
-              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
-                <path d="M10 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM10 8.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM11.5 15.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
-              </svg>
-            </button>
+                <% @topics.each do |topic|  %>
+                  <tr>
+                    <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
+                      <%= topic.title  %>
+                    </td>
+                    <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
+                      Web Development, Ruby on rails
+                    </td>
+                    <td class= "py-4 pr-3 pl-4 text-sm font-medium sm:pl-6">
+                      <div class="">
+                        <% topic.collections.each do |collection| %>
+                          <%= link_to collection.title, dashboard_collection_path(collection), class:"text-indigo-600 shadow rounded-full p-2 m-1 inline-block" %>
+                        <% end %>
+                      </div>
+                    </td>
+                    <td class="flex gap-2 py-3.5 pr-3 pl-4">
+                      <%= link_to dashboard_topic_path(topic.id), class: "p-2 bg-white shadow rounded-full"  do %>
+                        <%= phosphor_icon "pencil", class: "h-4 w-4 text-indigo-600" %>
+                      <% end  %>
+                      <%= button_to dashboard_topic_path(topic.id),
+                            method: :delete, data: { turbo_method: :delete, turbo_confirm: "You are about to delete a topic, are you sure? Posts associated to this topic WILL NOT be deleted"},
+                            class: "p-2 bg-white shadow rounded-full" do %>
+                              <%= phosphor_icon "trash", class: "h-5 w-5 text-red-500" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           </div>
         </div>
-      </li>
-      <% end  %>
-    </ul>
+      </div>
+    </div>
   </div>
-  </div>
-
 </div>
+<% end %>

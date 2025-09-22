@@ -1,0 +1,2 @@
+<%= f.input :visibility, as: :select,
+  collection: Topic.visibilities.keys.map { |k| [k.humanize.capitalize, k] },  include_blank: false%>

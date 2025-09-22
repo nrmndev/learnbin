@@ -1,5 +1,5 @@
 module Dashboard
-  class PartsController < ApplicationController
+  class PartsController < Dashboard::BaseController
     before_action :authenticate_user!
     before_action :set_part, only: %i[index show destroy move_down move_up]
     # /dashboard/topics/:id/articles

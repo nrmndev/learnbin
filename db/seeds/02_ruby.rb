@@ -31,6 +31,18 @@ post = Post.new(title: 'Installation', slug: 'installation', visibility: 0)
 post.user_id = topic.user_id
 post.save!
 
+TopicPost.create!(
+  topic_id: topic.id,
+  post_id: post.id,
+  position: 1
+)
+
+TopicPost.create!(
+  topic_id: topic.id,
+  post_id: post.id,
+  position: 2
+)
+
 pp "Creating 'sections' for 'installation' for Ruby on rails"
 # Add sections to the article
 part = Part.new(title: 'Download instructions', description: 'Lorem ipsum...', visibility: 0)

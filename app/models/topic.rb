@@ -5,7 +5,10 @@ class Topic < ApplicationRecord
   has_many :collection_topics, dependent: :destroy
   has_many :collections, through: :collection_topics
 
-  has_many :posts, dependent: :destroy
+  has_many :topic_posts, -> { order(:position) }, dependent: :destroy
+  has_many :posts, through: :topic_posts
+
+  has_many :parts, through: :posts
   acts_as_taggable_on :tags
 
   validates :title, presence: true

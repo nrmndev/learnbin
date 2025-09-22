@@ -1,5 +1,5 @@
 module Dashboard
-  class CategoriesController < ApplicationController
+  class CategoriesController < Dashboard::BaseController
     before_action :authenticate_user!
     # /dashboard/categories
     def index

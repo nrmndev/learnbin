@@ -1,18 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-
-  get 'articles/index'
-  get 'articles/show'
-  get 'articles/new'
-  get 'articles/edit'
-  get 'topics/index'
-  get 'topics/show'
-  get 'topics/new'
-  get 'topics/edit'
-  get 'categories/index'
-  get 'categories/show'
-  get 'categories/new'
-  get 'categories/edit'
+  root "dashboard#index"
 
  get '/dashboard', to: 'dashboard#index', as: :dashboard
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -34,11 +22,9 @@ Rails.application.routes.draw do
 
 
   resources :discover do
-    resources :categories do
-      resources :topics do
-        resources :posts do
-          resources :parts do
-          end
+    resources :topics do
+      resources :posts do
+        resources :parts do
         end
       end
     end
@@ -47,15 +33,20 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :collections do
       resources :collection_topics do
-      member do
-        patch :move_up
-        patch :move_down
+        member do
+          patch :move_up
+          patch :move_down
+        end
       end
     end
 
-    end
     resources :topics do
-
+      resources :topic_posts do
+        member do
+          patch :move_up
+          patch :move_down
+        end
+      end
     end
 
     resources :posts do
@@ -66,6 +57,14 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    resources :profile do
+    end
+
+    resources :usage, only: [:index]
+    resources :settings, only: [:index]
+    resources :activity, only: [:index]
+    resources :archives, only: [:index]
     # this gives: GET /dashboard/topics → dashboard/topics#index
     # and the rest of CRUD: show, new, edit, update, destroy
   end
@@ -75,7 +74,12 @@ Rails.application.routes.draw do
   #     get :articles
   #   end
   # end
-
+  resources :topics do
+    resources :posts do
+      resources :parts do
+      end
+    end
+  end
   namespace :api do
     get 'knowledge_base/index'
     get 'knowledge_base', to: 'knowledge_base#index'

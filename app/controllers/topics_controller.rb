@@ -1,14 +1,14 @@
 class TopicsController < ApplicationController
   before_action :set_category, only: %i[new create]
-  before_action :set_topic, only: %i[show edit update destroy]
+  before_action :set_topic, only: %i[show]
 
   def index
     @topics = Topic.all
   end
 
   def show
-    @topic = Topic.find(params[:id])
-    @articles = @topic.articles
+    @topic = Topic.includes(posts: :parts).find(params[:id])
+    @posts = @topic.topic_posts
   end
 
   def new
@@ -27,6 +27,8 @@ class TopicsController < ApplicationController
 
   def edit; end
 
+
+
   def update
     if @topic.update(topic_params)
       redirect_to @topic, notice: "Topic updated!"
@@ -35,10 +37,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  def destroy
-    @topic.destroy
-    redirect_to topics_path, notice: "Topic deleted!"
-  end
 
 
   def articles
