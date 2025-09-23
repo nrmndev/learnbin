@@ -1,11 +1,10 @@
 module Dashboard
   class PostsController < Dashboard::BaseController
-    before_action :authenticate_user!
     # before_action :set_topic, only: %i[index show]
     # before_action :set_category, only: %i[index show]
     before_action :set_posts, only: %i[index]
     before_action :set_post, only: %i[show update]
-
+    before_action :set_active_link
     # /dashboard/posts
     def index; end
 
@@ -46,6 +45,10 @@ module Dashboard
     def set_posts
       @posts = Post.where(user: current_user)
       @topic_posts = @posts.includes(:topics).all
+    end
+
+    def set_active_link
+      @active_link = 'posts'
     end
   end
 end

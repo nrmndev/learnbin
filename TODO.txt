@@ -26,7 +26,15 @@ PAUSE - Create Post redirect to http://localhost:3000/dashboard/posts/new?
 
 
 PAUSE - TAG and Category Association
-PRIORITY 1 - FRONT-End views to follow
+PRIORITY 1
+  - USER BASED COLLECTIONS (DASHBOARD)
+  - FRONT END views
+  - Topic, Collection, Posts, Parts
+  - User /discover/:user?
+  - FLASH TURBO
+  - Index Page
+  - Discover Page
+
 PRIORITY 2 - SIGN IN
 PRIORITY 3 - STATIC PROFILE (OR JUST UPDATE NICKNAME)
 PRIORITY 4 - DISCOVER

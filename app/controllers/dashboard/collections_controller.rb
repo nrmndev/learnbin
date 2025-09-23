@@ -1,7 +1,7 @@
 module Dashboard
   class CollectionsController < Dashboard::BaseController
-    before_action :authenticate_user!
     before_action :set_collection, only: %i[show update]
+    before_action :set_active_link
     # /dashboard/topics
     def index
       # @topics = Topic.all
@@ -62,10 +62,14 @@ module Dashboard
     private
 
     def set_collection
-      @user_collection = Collection.where(user: current_user)
+      @user_collection = Collection.all
       @collection = @user_collection.includes(:topics).find(params[:id])
       # optional: maybe only visible topics, or some scope
       @topics_for_sidebar = @collection.collection_topics
+    end
+
+    def set_active_link
+      @active_link = 'collections'
     end
 
     def collection_params

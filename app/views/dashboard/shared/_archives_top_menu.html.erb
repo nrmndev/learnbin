@@ -1,0 +1,18 @@
+    <header class="border-b border-gray-200">
+      <!-- Secondary navigation -->
+      <nav class="flex overflow-x-auto py-4">
+        <ul role="list" class="flex min-w-full flex-none gap-x-6 px-4 text-sm/6 font-semibold text-gray-500 sm:px-6 lg:px-8">
+          <li>
+            <%= link_to "Collections", dashboard_collections_path, class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium  #{@active_link == "collections" ? "text-indigo-600": "text-gray-900"}"  %>
+          </li>
+          <li>
+            <%= link_to "Topics", dashboard_topics_path,
+                class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium #{@active_link == "topics" ? "text-indigo-600": "text-gray-900"}"  %>
+          </li>
+          <li>
+            <%= link_to "Posts", dashboard_posts_path, data: { turbo_frame: "section_content" }, class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium  #{@active_link == "posts" ? "text-indigo-600": "text-gray-900"}" %>
+          </li>
+          <li><a href="#" class="inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium text-gray-900">Bookmarks</a></li>
+        </ul>
+      </nav>
+    </header>

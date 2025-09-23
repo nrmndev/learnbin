@@ -4,11 +4,16 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.all
+     render partial: "dashboard/sections/topics", locals: { topics: @topics }
   end
 
   def show
     @topic = Topic.includes(posts: :parts).find(params[:id])
     @posts = @topic.topic_posts
+    respond_to do |format|
+      format.html # ✅ required to replace whole page
+      format.turbo_stream # 👈 if this is first, Turbo might not replace layout
+    end
   end
 
   def new

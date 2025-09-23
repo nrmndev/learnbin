@@ -1,32 +1,29 @@
-<div class="bg-indigo-600 p-5 -mb-[50px] min-h-[150px]">
-  <div class="container mx-auto">
-    <%= render "shared/breadcrumbs", links: [
-      { text: "All Topics", url: dashboard_topics_path },
-      { text: @topic.title }
-      ]
-    %>
-
-    <%= render "dashboard/shared/title", title: @topic.title %>
-  </div>
-</div>
-
-<%= simple_form_for @topic, url: dashboard_topic_path(@topic) do |f| %>
-  <div class="container mx-auto">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
-    <!-- CONTENT -->
-    <div class="col-span-2">
-      <%= render "dashboard/topics/show/form_part", f:f  %>
-    </div>
-    <!-- END CONTENT -->
-    <!-- SIDE BAR-->
-    <div class="col-span-1 flex flex-col gap-3 bg-white">
-      <%= render "dashboard/topics/show/form_part_add_to_collection", f:f  %>
-      <%= render "dashboard/topics/show/post_in_this_topic"  %>
-    </div>
-    <!-- END SIDE BAR -->
-  </div>
+<% content_for :above do %>
+  <%= render "dashboard/shared/archives_top_menu"  %>
 <% end %>
-
+<%= render "dashboard/shared/layout" do %>
+  <%= render "shared/breadcrumbs", links: [
+      { text: "All Topics", url: dashboard_topics_path },
+      { text: @topic.title}
+    ]
+  %>
+  <%= render "dashboard/shared/title", title: @topic.title %>
+  <%= simple_form_for @topic, url: dashboard_topic_path(@topic) do |f| %>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+      <!-- CONTENT -->
+      <div class="col-span-2">
+        <%= render "dashboard/topics/show/form_part", f:f  %>
+      </div>
+      <!-- END CONTENT -->
+      <!-- SIDE BAR-->
+      <div class="col-span-1 flex flex-col gap-3 bg-white">
+        <%= render "dashboard/topics/show/form_part_add_to_collection", f:f  %>
+        <%= render "dashboard/topics/show/post_in_this_topic"  %>
+      </div>
+      <!-- END SIDE BAR -->
+    </div>
+  <% end %>
+<% end %>
 <%= render 'shared/modal' do %>
   <%# render 'dashboard/posts/form'  %>
 <% end %>

@@ -112,36 +112,38 @@
           <ul role="list" class="-mx-2 space-y-1">
             <li>
               <!-- Current: "bg-gray-100 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-100" -->
-              <%= link_to dashboard_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{controller_name == "dashboard" ? "text-indigo-600" : ""}" do %>
-                <%= phosphor_icon "house", class: "group-hover:text-indigo-600 #{controller_name == "dashboard" ? "text-indigo-600"  : "text-gray-400"}"  %>
+              <%= link_to dashboard_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "dashboard" ? "text-indigo-600" : "text-gray-600"}" do %>
+                <%= phosphor_icon "house", class: "group-hover:text-indigo-600" %>
                 Dashboard Home
               <% end %>
             </li>
             <li>
               <!-- Current: "bg-gray-100 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-100" -->
-              <%= link_to dashboard_archives_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{controller_name == "archives" ? "text-indigo-600" : ""}" , data: { turbo_frame: "dashboard_content" }  do %>
-                <%= phosphor_icon "folder", class: "group-hover:text-indigo-600 #{controller_name == "archives" ? "text-indigo-600"  : "text-gray-400"}"  %>
+              <% archive_active_sections = ["archives", "topics", "collections", "posts", "bookmarks"] %>
+              <%= link_to dashboard_archives_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{archive_active_sections.include?(@section) ? "text-indigo-600" : "text-gray-600"}" , data: { turbo_frame: "dashboard_content", }  do %>
+                <%= phosphor_icon "folder", class: "group-hover:text-indigo-600"  %>
                 Archives
               <% end %>
             </li>
             <li>
-              <%= link_to dashboard_activity_index_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{controller_name == "activity" ? "text-indigo-600" : ""}", data: { turbo_frame: "dashboard_content" }  do %>
-                <%= phosphor_icon "cell-signal-full", class: "group-hover:text-indigo-600 #{controller_name == "activity" ? "text-indigo-600"  : "text-gray-400"}"  %>
+              <%= link_to dashboard_activity_index_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "activity" ? "text-indigo-600" : "text-gray-600"}", data: { turbo_frame: "dashboard_content" }  do %>
+                <%= phosphor_icon "cell-signal-full", class: "group-hover:text-indigo-600"  %>
                 Activity
               <% end %>
             </li>
             <li>
-              <%= link_to dashboard_usage_index_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{controller_name == "usage" ? "text-indigo-600" : ""}", data: { turbo_frame: "dashboard_content" } do %>
-                <%= phosphor_icon "chart-bar", class: "group-hover:text-indigo-600 #{controller_name == "usage" ? "text-indigo-600"  : "text-gray-400"}"  %>
+              <%= link_to dashboard_usage_index_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "usage" ? "text-indigo-600" : "text-gray-600"}", data: { turbo_frame: "dashboard_content" } do %>
+                <%= phosphor_icon "chart-bar", class: "group-hover:text-indigo-600"  %>
                 Usage
               <% end %>
             </li>
             <li>
-              <%= link_to dashboard_settings_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{controller_name == "settings" ? "text-indigo-600" : ""}", data: { turbo_frame: "dashboard_content" } do %>
-                <%= phosphor_icon "gear", class: "group-hover:text-indigo-600 #{controller_name == "settings" ? "text-indigo-600"  : "text-gray-400"}"  %>
+              <%= link_to dashboard_settings_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "settings" ? "text-indigo-600" : "text-gray-600"}", data: { turbo_frame: "dashboard_content" } do %>
+                <%= phosphor_icon "gear", class: "group-hover:text-indigo-600"  %>
                 Settings
-               <% end %>
+              <% end %>
             </li>
+            <li><%= @section.inspect  %></li>
           </ul>
         </li>
 

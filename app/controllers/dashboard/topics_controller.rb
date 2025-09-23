@@ -1,8 +1,8 @@
 module Dashboard
   class TopicsController < Dashboard::BaseController
-    before_action :authenticate_user!
     before_action :set_topic, only: %i[show update]
     before_action :set_topics, only: %i[index]
+    before_action :set_active_link
     # /dashboard/topics
     def index
       @posts = Post.none
@@ -70,6 +70,10 @@ module Dashboard
 
     def set_topics
       @topics = Topic.where(user: current_user)
+    end
+
+    def set_active_link
+      @active_link = 'topics'
     end
 
     def topic_params

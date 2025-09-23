@@ -58,16 +58,19 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :profile do
-    end
-
+    resources :profile, only: [:index]
     resources :usage, only: [:index]
     resources :settings, only: [:index]
     resources :activity, only: [:index]
     resources :archives, only: [:index]
+
     # this gives: GET /dashboard/topics → dashboard/topics#index
     # and the rest of CRUD: show, new, edit, update, destroy
   end
+
+  # get "dashboard/activity", to: "dashboard#activity", as: :dashboard_activity
+  # get "dashboard/archives", to: "dashboard#archives", as: :dashboard_archives
+  # get "dashboard/profile", to: "dashboard#profile", as: :dashboard_profile
 
   # resources :topics do
   #   member do

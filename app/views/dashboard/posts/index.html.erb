@@ -11,9 +11,16 @@
   </div>
 </div>
 
-<div class="container mx-auto">
-  <%= link_to new_dashboard_post_path, class:"inline-flex items-center btn-primary"  do %>
-    <%= phosphor_icon "plus", class:"h-4 w-4 text-white"%> Create Post
-  <% end  %>
+<% content_for :above do %>
+  <%= render "dashboard/shared/archives_top_menu"  %>
+<% end %>
+
+<%= render "dashboard/shared/layout" do %>
+  <div class="flex styled-border-b">
+    <h2 class="text-4xl grow">Posts</h2>
+    <%= link_to new_dashboard_post_path, class:"inline-flex items-center btn-primary"  do %>
+      <%= phosphor_icon "plus", class:"h-4 w-4 text-white"%> Create Post
+    <% end  %>
+  </div>
   <%= render "dashboard/posts/index/table"  %>
-</div>
+<% end %>

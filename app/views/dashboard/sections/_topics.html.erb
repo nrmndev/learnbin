@@ -1,0 +1,66 @@
+
+<div class="bg-indigo-600 p-5 mb-3">
+  <div class="container mx-auto">
+      <%= render "shared/breadcrumbs", links: [
+      { text: "Dashboard", url: dashboard_path },
+      { text: "All Topics" }
+      ]
+    %>
+    <%= render "dashboard/shared/title", title: "Topics" %>
+  </div>
+</div>
+<%= turbo_frame_tag "dashboard_content" do %>
+<div class="xl:pl-72">
+  <%= render "dashboard/shared/archives_top_menu"  %>
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div class="mt-8 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg">
+            <table class="relative min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Tags</th>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Attached to Collections</th>
+                  <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white text-gray-700">
+
+                <% @topics.each do |topic|  %>
+                  <tr>
+                    <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
+                      <%= topic.title  %>
+                    </td>
+                    <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
+                      Web Development, Ruby on rails
+                    </td>
+                    <td class= "py-4 pr-3 pl-4 text-sm font-medium sm:pl-6">
+                      <div class="">
+                        <% topic.collections.each do |collection| %>
+                          <%= link_to collection.title, dashboard_collection_path(collection), class:"text-indigo-600 shadow rounded-full p-2 m-1 inline-block" %>
+                        <% end %>
+                      </div>
+                    </td>
+                    <td class="flex gap-2 py-3.5 pr-3 pl-4">
+                      <%= link_to dashboard_topic_path(topic.id), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "dashboard_content" }  do %>
+                        <%= phosphor_icon "pencil", class: "h-4 w-4 text-indigo-600" %>
+                      <% end  %>
+                      <%= button_to dashboard_topic_path(topic.id),
+                            method: :delete, data: { turbo_method: :delete, turbo_confirm: "You are about to delete a topic, are you sure? Posts associated to this topic WILL NOT be deleted"},
+                            class: "p-2 bg-white shadow rounded-full" do %>
+                              <%= phosphor_icon "trash", class: "h-5 w-5 text-red-500" %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

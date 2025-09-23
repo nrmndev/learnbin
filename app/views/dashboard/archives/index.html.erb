@@ -1,35 +1,9 @@
-<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
-<!--
-  This example requires updating your template:
+<% content_for :above do %>
+  <%= render 'dashboard/shared/archives_top_menu'  %>
+<% end %>
 
-  ```
-  <html class="h-full bg-white">
-  <body class="h-full">
-  ```
--->
-<%= turbo_frame_tag "dashboard_content" do %>
-
-<div class="xl:pl-72">
-  <main>
+<%= render "dashboard/shared/layout" do %>
     <h1 class="sr-only">Account Settings</h1>
-
-    <header class="border-b border-gray-200">
-      <!-- Secondary navigation -->
-      <nav class="flex overflow-x-auto py-4">
-        <ul role="list" class="flex min-w-full flex-none gap-x-6 px-4 text-sm/6 font-semibold text-gray-500 sm:px-6 lg:px-8">
-          <li>
-            <a href="#" class="text-indigo-600">Collections</a>
-          </li>
-          <li>
-            <%= link_to "Topics", dashboard_topics_path, class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium text-gray-900"  %>
-          </li>
-          <li>
-            <a href="#" class="">Posts</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
 
     <!-- Settings forms -->
     <div class="divide-y divide-gray-200">
@@ -170,7 +144,4 @@
         </form>
       </div>
     </div>
-  </main>
-</div>
-
 <% end %>

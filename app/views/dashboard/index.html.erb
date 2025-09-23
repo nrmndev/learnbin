@@ -8,13 +8,6 @@
   <body class="h-full">
   ```
 -->
-<%= render "dashboard/shared/side_nav"  %>
-
-<%= turbo_frame_tag "dashboard_content" do %>
-  <div class="xl:pl-72">
-
-    <main>
+<%= render "dashboard/shared/layout" do %>
       DASHBOARD HOME
-    </main>
-  </div>
 <% end %>

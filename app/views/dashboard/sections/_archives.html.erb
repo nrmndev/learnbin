@@ -1,31 +1,6 @@
-
-
-<% content_for :above do %>
-      <header class="border-b border-gray-200">
-      <!-- Secondary navigation -->
-      <nav class="flex overflow-x-auto py-4">
-        <ul role="list" class="flex min-w-full flex-none gap-x-6 px-4 text-sm/6 font-semibold text-gray-500 sm:px-6 lg:px-8">
-          <li>
-            <a href="#" class="text-indigo-600">Account</a>
-          </li>
-          <li>
-            <a href="#" class="">Notifications</a>
-          </li>
-          <li>
-            <a href="#" class="">Plans</a>
-          </li>
-          <li>
-            <a href="#" class="">Billing</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-<% end %>
-<%= render "dashboard/shared/layout" do %>
+<%= turbo_frame_tag "dashboard_section" do %>
     <h1 class="sr-only">Account Settings</h1>
-
-
-
+    <%= render 'dashboard/shared/archives_top_menu'  %>
     <!-- Settings forms -->
     <div class="divide-y divide-gray-200">
       <div class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">

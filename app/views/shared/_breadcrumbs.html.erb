@@ -1,21 +1,17 @@
 <%# locals: (links: []) -%>
 <nav aria-label="Breadcrumb" class="flex">
-  <ol role="list" class="flex items-center space-x-4">
+  <ol role="list" class="flex items-center text-sm font-medium text-gray-500">
   <% links.each_with_index do |link, index| %>
-    <li>
-    <div class="flex items-center">
-      <% if index > 0 %>
-      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 shrink-0 text-gray-300">
-        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-      </svg>
-      <% end %>
+    <% if index > 0 %>
+      <%= phosphor_icon "caret-double-right", class: "h-2 w-2 m-2" %>
+    <% end %>
+    <li class="flex items-center">
       <% if link[:url] %>
-        <%= link_to link[:text], link[:url], class: "#{index > 0 ? 'ml-4' : ''} text-sm font-medium text-white"  %>
+        <%= link_to link[:text], link[:url]  %>
       <% else %>
-        <span class="ml-4 text-sm font-medium text-white"><%= link[:text] %></span>
+        <%= link[:text] %>
       <% end %>
-    </div>
-  </li>
+    </li>
 
   <% end %>
   </ol>
