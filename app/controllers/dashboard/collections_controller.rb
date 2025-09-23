@@ -15,18 +15,19 @@ module Dashboard
     def show; end
 
     def new
-      # @category = Category.find(params[:category_id])
-      # @topic = @category.topics.new
-      # then render something, possibly your modal content
+      @collection = Collection.new
+      @collection.user_id = current_user.id
     end
 
     def create
-      # if @topic.save
-      #   redirect_to dashboard_topic_path(@topic), notice: "Topic created"
-      # else
-      #   # re‑render the view that has the modal, ensure @topic is not nil
-      #   render :show
-      # end
+      @collection = Collection.new(collection_params)
+      @collection.user_id = current_user.id
+      if @collection.save!
+       # redirect_to dashboard_collections_path, notice: "Collection created"
+      else
+        # re‑render the view that has the modal, ensure @topic is not nil
+        render :index
+      end
     end
 
     def update
@@ -34,7 +35,7 @@ module Dashboard
         flash.now[:notice] = "Collection updated successfully!"
         render turbo_stream: [
           turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @collection.title }),
-          turbo_stream.append("flash", partial: "layouts/flash")
+          # turbo_stream.append("flash", partial: "layouts/flash")
         ]
       else
         render :edit
@@ -73,7 +74,7 @@ module Dashboard
     end
 
     def collection_params
-      params.require(:collection).permit(:title, :visibility, :slug, :description)
+      params.require(:collection).permit(:title, :visibility, :category_id, :slug, :description)
     end
   end
 end

@@ -3,40 +3,45 @@
 
 
 <section class="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
-    <div class="px-4 mx-auto max-w-screen-xl text-center py-12 lg:py-12">
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Feed Your Curiosity, Expand Your Mind</h1>
-        <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Search Topics That Spark Your Curiosity.</p>
-        <div class="max-w-128 mx-auto flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-          <%= simple_form_for :search, url: discover_index_path,
+  <div class="px-4 mx-auto max-w-screen-xl text-center py-12 lg:py-12">
+    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Feed Your Curiosity, Expand Your Mind</h1>
+    <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Search Topics That Spark Your Curiosity.</p>
+    <div class="max-w-128 mx-auto flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+      <div class="relative">
+      <%= simple_form_for :search, url: discover_index_path,
+              method: :get, html: { data: { turbo_frame: "topics_search" },
+              wrapper: false, class:"flex flex-row gap-4 w-full  w-128" } do |f| %>
+      <div class="absolute grid grid-cols-1">
+        <select id="location" name="location" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-none sm:text-sm/6">
+          <option>User</option>
+          <option selected>Collection</option>
+          <option>Topics</option>
+        </select>
+        <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4">
+          <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="pt-8 pb-3 px-3 bg-white flex">
+        <%= f.input :q, wrapper: false, placeholder: "Ruby on Rails", label: false, input_html: {class: "block w-full rounded-md bg-white  text-base text-gray-900 outline-none placeholder:text-gray-400 sm:text-sm/6"} %>
+        <div class="inline-flex text-sm items-center">
+          <%= phosphor_icon "magnifying-glass", class:"w-4 h-4" %>Search
+        </div>
+      </div>
+      <% end %>
+    <div>
+  </div>
+</div>
+
+          <%# = simple_form_for :search, url: discover_index_path,
               method: :get, html: { data: { turbo_frame: "topics_search" },
               wrapper: false, class:"flex flex-row gap-4 w-full" } do |f| %>
-            <%= f.input :q, wrapper: false, label: false, input_html: {class: "border border-white rounded-xl text-white p-3"} %>
-            <%= f.button :submit, "Search" %>
-          <% end %>
+            <%# = f.input :q, wrapper: false, label: false, input_html: {class: "border border-white rounded-xl text-white p-3"} %>
+            <%# = f.button :submit, "Search" %>
+          <%# end %>
 
         </div>
     </div>
 </section>
 
-<%= turbo_frame_tag "topics_search" do %>
-<div class="container mx-auto my-4">
-  <ul class="grid grid-cols-4 md:grid-cols-6 gap-3">
-      <li class="rounded-md border border-gray-200 bg-white p-3">
-        <a href="#" class="font-medium text-gray-900 hover:text-gray-600 flex flex-col gap-2">
-          Ruby on Rails
-          <div>
-            <p class="flex items-center gap-x-2 text-sm text-gray-500"><%= phosphor_icon "pencil-line", class: "h-4 w-4 text-blue-500" %>  Norman </p>
-          </div>
-          <div class="flex gap-1 justify-left items-center text-xs text-gray-500">
-            <%= phosphor_icon "eye", class: "h-4 w-4 text-blue-500" %>15k
-            <%= phosphor_icon "star", class: "h-4 w-4 text-yellow-500" %>100
-          </div>
-        </a>
-      </li>
-      <li class="rounded-md border border-gray-200 bg-white p-3">
-        Ruby on Rails by Norman
-      </li>
-  </ul>
-  </div>
-  <%= render "discover/search_results", topics: @topics   %>
-<% end %>
+
+  <%= render "discover/default_content"  %>

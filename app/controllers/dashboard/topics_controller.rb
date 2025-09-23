@@ -35,7 +35,7 @@ module Dashboard
         flash.now[:notice] = "Topic updated successfully!"
         render turbo_stream: [
           turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @topic.title }),
-          turbo_stream.append("flash", partial: "layouts/flash")
+          # turbo_stream.append("flash", partial: "layouts/flash")
         ]
       else
         render :edit

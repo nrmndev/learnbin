@@ -1,0 +1,10 @@
+<%= render "dashboard/shared/layout" do %>
+ <%= render "shared/breadcrumbs", links: [
+      { text: "All Collections", url: dashboard_collections_path },
+      { text: "Creating a collection"}
+    ]
+  %>
+  <%= render "dashboard/shared/title", title: "Creating new collection" %>
+  <%= render "form"  %>
+
+<% end %>

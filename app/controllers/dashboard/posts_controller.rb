@@ -18,7 +18,7 @@ module Dashboard
         flash.now[:notice] = "Post updated successfully!"
         render turbo_stream: [
           turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @post.title }),
-          turbo_stream.append("flash", partial: "layouts/flash")
+          # turbo_stream.append("flash", partial: "layouts/flash")
         ]
         # redirect_to dashboard_post_path(@post), notice: "part updated!"
       end

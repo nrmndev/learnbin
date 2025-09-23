@@ -1,15 +1,4 @@
 
-<div class="bg-indigo-600 p-5 mb-3">
-  <div class="container mx-auto">
-      <%= render "shared/breadcrumbs", links: [
-      { text: "Dashboard", url: dashboard_path },
-      { text: "All Collections" }
-      ]
-    %>
-    <%= render "dashboard/shared/title", title: "Collections" %>
-  </div>
-</div>
-
 <% content_for :above do %>
   <%= render "dashboard/shared/archives_top_menu"  %>
 <% end %>

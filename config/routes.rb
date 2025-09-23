@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  root "dashboard#index"
+  root "home#index"
 
- get '/dashboard', to: 'dashboard#index', as: :dashboard
+  get '/dashboard', to: 'dashboard#index', as: :dashboard
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # get "/topics", to: redirect("/dashboard/topics")
+  # get "/topics/:id", to: redirect("/dashboard/topics/:id")
+  # get "/posts", to: redirect("/dashboard/posts")
+  # get "/posts/:id", to: redirect("/dashboard/posts/:id")
+  # get "/parts", to: redirect("/dashboard/parts")
+  # get "/parts/:id", to: redirect("/dashboard/parts/:id")
+
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -12,7 +19,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :categories do
-    resources :topics
+    # resources :topics
   end
 
 
@@ -77,12 +84,14 @@ Rails.application.routes.draw do
   #     get :articles
   #   end
   # end
-  resources :topics do
-    resources :posts do
-      resources :parts do
-      end
-    end
-  end
+  # resources :topics do
+  #   resources :posts do
+  #     resources :parts do
+  #     end
+  #   end
+  # end
+
+  get '/:username', to: 'users#index', as: :user
   namespace :api do
     get 'knowledge_base/index'
     get 'knowledge_base', to: 'knowledge_base#index'

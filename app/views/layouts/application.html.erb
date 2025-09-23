@@ -24,5 +24,10 @@
     <main class="">
       <%= yield %>
     </main>
+
+    <% if !@is_dashboard_page  %>
+      <%= render "layouts/cta"  %>
+      <%= render "layouts/footer"  %>
+    <% end %>
   </body>
 </html>
