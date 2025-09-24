@@ -94,7 +94,13 @@ Rails.application.routes.draw do
   get '/topic', to: 'topics#index', as: :topic_search
 
   scope ':user', module: 'users', param: :username, as: :user do
-    resources :topics
+    resources :topics do
+      resources :posts do
+        resources :parts do
+
+        end
+      end
+    end
   end
 
   namespace :api do
