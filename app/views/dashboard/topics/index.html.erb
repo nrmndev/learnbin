@@ -49,7 +49,7 @@
                             <%= phosphor_icon "trash", class: "h-5 w-5 text-red-500" %>
                     <% end %>
 
-                    <%= link_to topic_path(topic.id), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "_top" }  do %>
+                    <%= link_to user_topic_path(current_user.name,topic.id), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "_top" }  do %>
                       <%= phosphor_icon "arrow-arc-right", class: "h-4 w-4 text-indigo-600" %>
                     <% end  %>
                   </td>

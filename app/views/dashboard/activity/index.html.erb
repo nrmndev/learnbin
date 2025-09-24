@@ -1,3 +1,44 @@
 <%= render "dashboard/shared/layout" do %>
-  Activity Index page
+<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+<h2 class="heading-underlined">Activity</h2>
+  <p class="mt-1 text-sm text-gray-500">Here are suggested activities based on your notification settings. <span class="text-indigo-600">(change setting)</span></p>
+<div class="container mx-auto p-5">
+  <ul role="list" class="space-y-6">
+
+    <% 10.times do %>
+      <li class="relative flex gap-x-4">
+        <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
+          <div class="w-px bg-gray-200"></div>
+        </div>
+        <img src='https://picsum.photos/seed/<%=Faker::Number.number(digits: 5)%>/100/100' alt="" class="relative mt-3 size-6 flex-none rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5" />
+        <div class="flex-auto rounded-md p-3 ring-1 ring-gray-200 ring-inset">
+          <div class="flex justify-between gap-x-4">
+            <div class="py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900"><%= Faker::Name.neutral_first_name %> <%= Faker::Name.last_name%> (@<%= Faker::FunnyName.name %>)</span> created a collection: <strong>"<%= Faker::Lorem.paragraph(sentence_count: 3) %>" </strong></div>
+            <time datetime="2023-01-23T15:56" class="flex-none py-0.5 text-xs/5 text-gray-500">1h ago</time>
+          </div>
+          <p class="text-sm/6 text-gray-500"><%= Faker::Lorem.paragraph(sentence_count: 5) %></p>
+        </div>
+      </li>
+
+    <% end %>
+
+    <li class="relative flex gap-x-4">
+      <div class="absolute top-0 left-0 flex h-6 w-6 justify-center">
+        <div class="w-px bg-gray-200"></div>
+      </div>
+      <div class="relative flex size-6 flex-none items-center justify-center bg-white">
+        <svg viewBox="0 0 24 24" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-6 text-indigo-600">
+          <path d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" fill-rule="evenodd" />
+        </svg>
+      </div>
+      <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Alex Curren</span> paid the invoice.</p>
+      <time datetime="2023-01-24T09:20" class="flex-none py-0.5 text-xs/5 text-gray-500">1d ago</time>
+    </li>
+  </ul>
+
+</div>
+
+</div>
+
 <% end %>

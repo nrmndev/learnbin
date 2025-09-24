@@ -8,10 +8,11 @@
       end
     end
 
+    def show;end
     private
     def set_user
       if params[:username]
-        @user = User.find_by(name: params[:username])
+        @user = User.find_by(name: params[:name])
       end
     end
   end

@@ -90,8 +90,13 @@ Rails.application.routes.draw do
   #     end
   #   end
   # end
+  get '/:user', to: 'users#show', param: :username, as: :user
+  get '/topic', to: 'topics#index', as: :topic_search
 
-  get '/:username', to: 'users#index', as: :user
+  scope ':user', module: 'users', param: :username, as: :user do
+    resources :topics
+  end
+
   namespace :api do
     get 'knowledge_base/index'
     get 'knowledge_base', to: 'knowledge_base#index'
