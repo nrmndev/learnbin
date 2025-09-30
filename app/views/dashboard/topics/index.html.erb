@@ -41,7 +41,7 @@
                   <td class= "py-4 pr-3 pl-4 text-sm font-medium sm:pl-6">
                     <div class="">
                       <% topic.collections.each do |collection| %>
-                        <%= link_to collection.title, dashboard_collection_path(collection), class:"text-indigo-600 shadow rounded-full p-2 m-1 inline-block" %>
+                        <%= link_to collection.title, dashboard_collection_path(collection.id), class:"text-indigo-600 shadow rounded-full p-2 m-1 inline-block" %>
                       <% end %>
                     </div>
                   </td>

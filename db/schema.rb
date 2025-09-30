@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_29_114818) do
 
   create_table "collections", force: :cascade do |t|
     t.string "title", null: false
-    t.string "slug", null: false
+    t.string "slug"
     t.text "description"
     t.bigint "category_id", null: false
     t.bigint "user_id", null: false
@@ -63,14 +63,24 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_29_114818) do
     t.string "title", null: false
     t.text "description"
     t.string "slug"
-    t.bigint "post_id", null: false
     t.bigint "user_id", null: false
     t.integer "position"
     t.integer "visibility", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_parts_on_post_id"
     t.index ["user_id"], name: "index_parts_on_user_id"
+  end
+
+  create_table "post_parts", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "part_id", null: false
+    t.integer "position"
+    t.integer "visibility", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["part_id"], name: "index_post_parts_on_part_id"
+    t.index ["post_id", "part_id"], name: "index_post_parts_on_post_id_and_part_id"
+    t.index ["post_id"], name: "index_post_parts_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -84,37 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_29_114818) do
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_posts_on_slug"
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "taggings", force: :cascade do |t|
-    t.bigint "tag_id"
-    t.string "taggable_type"
-    t.bigint "taggable_id"
-    t.string "tagger_type"
-    t.bigint "tagger_id"
-    t.string "context", limit: 128
-    t.datetime "created_at", precision: nil
-    t.string "tenant", limit: 128
-    t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
-    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
-    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
-    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
-    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
-    t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
-    t.index ["tenant"], name: "index_taggings_on_tenant"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "topic_posts", force: :cascade do |t|
@@ -159,10 +138,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_29_114818) do
   add_foreign_key "collection_topics", "topics"
   add_foreign_key "collections", "categories"
   add_foreign_key "collections", "users"
-  add_foreign_key "parts", "posts"
   add_foreign_key "parts", "users"
+  add_foreign_key "post_parts", "parts"
+  add_foreign_key "post_parts", "posts"
   add_foreign_key "posts", "users"
-  add_foreign_key "taggings", "tags"
   add_foreign_key "topic_posts", "posts"
   add_foreign_key "topic_posts", "topics"
   add_foreign_key "topics", "users"

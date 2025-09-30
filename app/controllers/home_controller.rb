@@ -1,4 +1,5 @@
 
   class HomeController < ApplicationController
-    def index;end
+    # root#index /views/home/index.html
+    def index; end
   end

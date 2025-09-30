@@ -19,7 +19,7 @@
                   <ul class="mt-1 px-2 list-disc list-inside">
                     <% post.parts.each do |part| %>
                         <li>
-                          <%= link_to part.title, username_topic_post_part_path(@topic.user.username, @topic, post, part), data: { turbo_frame: "content_frame" } %>
+                          <%= link_to part.title, username_topic_post_part_path(@topic.user.username, @topic, post.id, part.id), data: { turbo_frame: "content_frame" } %>
                         </li>
                         </li>
                     <% end %>

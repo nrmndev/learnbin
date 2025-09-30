@@ -1,27 +1,30 @@
 class Topic < ApplicationRecord
-  extend FriendlyId
+  # extend FriendlyId
+  # friendly_id :title, use: [:slugged, :scoped]
   include Visibility
   belongs_to :user
-  friendly_id :title, use: [:slugged, :scoped], scope: :user
+
+  # Collection-Topic Relation
   has_many :collection_topics, dependent: :destroy
   has_many :collections, through: :collection_topics
 
+  # Topic-Post Relation
   has_many :topic_posts, -> { order(:position) }, dependent: :destroy
   has_many :posts, through: :topic_posts
 
+  # Topic-Part Relation
   has_many :parts, through: :posts
-  acts_as_taggable_on :tags
 
   validates :title,
     length: {
-    minimum: 6,
+    minimum: 5,
     maximum: 50,
     too_short: "must be at least %{count} characters",
     too_long: "must be at most %{count} characters"
-  }, uniqueness: { scope: :user_id, message: "you already have a topic with that title" }
-  # slug optional? If you need friendly URLs for topics
-  validates :slug, uniqueness: { scope: :user_id, message: "you already have a topic with that slug" }, allow_nil: true
- #enum visibility: { visible: 0, private: 1, hidden: 2 }, _suffix: true
+  }
+  #, uniqueness: { scope: :user_id, message: "you already have a topic with that title" }
+
+  # validates :slug, uniqueness: { scope: :user_id, message: "you already have a topic with that slug" }, allow_nil: true
 
   scope :user_page_search, ->(term) {
     return all if term.blank?

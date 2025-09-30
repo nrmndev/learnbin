@@ -1,20 +1,24 @@
 class Part < ApplicationRecord
-  extend FriendlyId
-  include Visibility
-  belongs_to :post
-  belongs_to :user
+  #extend FriendlyId
+  # friendly_id :title, use: [:slugged, :scoped]
 
-  friendly_id :title, use: [:slugged, :scoped], scope: :post
+  include Visibility
+  belongs_to :user
+acts_as_list scope: :post_parts
+  # Post-Part Relation
+  has_many :post_parts, -> { order(:position) }, dependent: :destroy
+  has_many :posts, through: :post_parts
+
 
   validates :title, presence: true,
     length: {
-    minimum: 6,
+    minimum: 5,
     maximum: 50,
     too_short: "must be at least %{count} characters",
     too_long: "must be at most %{count} characters"
   }
   before_save :normalize_content
-  acts_as_list scope: :post
+  #acts_as_list scope: :post
 
   private
 

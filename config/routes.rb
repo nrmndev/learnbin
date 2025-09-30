@@ -57,12 +57,15 @@ Rails.application.routes.draw do
     end
 
     resources :posts do
-      resources :parts do
+      resources :post_parts do
         member do
           patch :move_up
           patch :move_down
         end
       end
+    end
+
+    resources :parts do
     end
 
     resources :profile, only: [:index]

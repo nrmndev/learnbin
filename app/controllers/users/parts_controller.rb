@@ -58,12 +58,24 @@ module Users
     end
 
     def set_prev
-      @prev_part = @part.higher_item
+      pp = PostPart.find_by(post: @post, part: @part)
+      if pp
+        prev_pp = pp.higher_item
+        @prev_part = prev_pp&.part
+      else
+        @prev_part = nil
+      end
     end
 
     # Get the part with ID greater than current, the closest one
     def set_next
-      @next_part = @part.lower_item
+      pp = PostPart.find_by(post: @post, part: @part)
+      if pp
+        next_pp = pp.lower_item
+        @next_part = next_pp&.part
+      else
+        @next_part = nil
+      end
     end
   end
 end

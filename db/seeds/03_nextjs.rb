@@ -1,35 +1,59 @@
 norman = User.find_by(email: 'nrmndev@gmail.com')
-collection = Collection.find_by(title: 'Next JS')
-category = Category.find_by(title: 'Programming', slug: 'programming')
-pp 'Creating NextJS topic'
+
+common_post_attrs = {
+  visibility: 0,
+  user_id: norman.id
+}
+collection = Collection.find_by(title:'Next JS')
+
+pp 'Creating Next JS topic'
 # Add topics to it
-topic = Topic.new(title: 'NextJS Installation', slug: 'nextjs-installation', user: norman, visibility: 0)
-topic.user_id = norman.id
-topic.save!
+
+topics = ['Installation', 'Express Routing', 'File Structure']
+topics.each_with_index do |title, index|
+  topic = Topic.create!(common_post_attrs.merge(title: title))
+
+  CollectionTopic.create!(
+    collection_id: collection.id,
+    topic_id: topic.id,
+    position: index
+  )
+end
+
+############# POST FOR TOPIC 1
+ct = CollectionTopic
+       .joins(:topic)
+       .where(collection_id: collection.id, topics: { title: 'Installation' })
+       .first
+
+posts = ['Installation - 1', 'Installation - 2', 'Installation - 3', 'Installation - 4', 'Installation - 5', 'Installation - 6']
+
+posts.each_with_index do |title, index|
+  pp "Creating Post: #{title} for topic_id: 1"
+  post = Post.create!(common_post_attrs.merge(title: "NextJS #{title}"))
+  pp "Adding TopicPost: post_id:#{post.id} and topic_id: 1"
+  TopicPost.create!(
+    topic_id: ct.topic_id,
+    post_id: post.id,
+    position: index + 1
+  )
+end
+pp 'Post and TopicPosts created successfully'
 
 
-# Associate topic to collection_topic
-CollectionTopic.create!(
-  collection_id: collection.id,
-  topic_id: topic.id,
-  position: 1
-)
+############# POST FOR POST 1
 
-pp "Creating 'installation' part for NextJS"
+post1 = Post.find_by(title: 'NextJS Installation - 1')
 
-post = Post.new(title: 'via NPM', slug: 'installation', visibility: 0)
-# post.topic_id = topic.id
-post.user_id = topic.user_id
-post.save!
-
-pp "Creating 'parts' for 'installation' for NextJS"
-# Add sections to the article
-part = Part.new(title: 'Download instructions', description: 'Lorem ipsum...', visibility: 0)
-part.post_id = post.id
-part.user_id = topic.user_id
-part.save!
-
-part2 = Part.new(title: 'Using Doctypes', description: 'Lorem ipsum...', visibility: 0)
-part2.post_id = post.id
-part2.user_id = topic.user_id
-part2.save!
+parts = ['Part 1', 'Part 2', 'Part 3', 'Part 4', 'Part 5', 'Part 6', 'Part 7']
+parts.each_with_index do |title, index|
+  pp "Creating Part: #{title} for post_id: 1"
+  part = Part.create!(common_post_attrs.merge(title: title, description: "lorem ipsum #{index}"))
+  pp "Creating PostParts:"
+  PostPart.create!(
+    part_id: part.id,
+    post_id: post1.id,
+    position: index + 1
+  )
+end
+pp 'Part and PostParts created successfully'

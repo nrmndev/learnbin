@@ -44,7 +44,7 @@ module Dashboard
     end
 
     def show
-       @orig_topic = @topic.dup
+      @orig_topic = @topic.dup
       @orig_topic.id = @topic.id
       # Also copy slug or whatever your to_param uses:
       @orig_topic.slug = @topic.slug  if @topic.respond_to?(:slug)
@@ -81,7 +81,7 @@ module Dashboard
       @topics = Topic
                 .where(user_id: current_user.id)
                 .order(title: :asc)
-                .paginate(page: params[:page], per_page: 5)
+                .paginate(page: params[:page], per_page: 20)
     end
 
     def index_params_permit

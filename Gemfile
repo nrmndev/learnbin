@@ -84,7 +84,7 @@ gem 'highlightjs-rails'
 gem 'acts_as_list'
 gem 'devise'
 gem "phosphor_icons"
-gem 'acts-as-taggable-on'
+# gem 'acts-as-taggable-on'
 
 gem 'faker'
 gem 'will_paginate'

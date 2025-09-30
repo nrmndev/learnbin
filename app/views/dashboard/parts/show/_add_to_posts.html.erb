@@ -1,0 +1,14 @@
+  <div class="p-5 rounded-xl shadow bg-white">
+    <h3 class="heading-underlined">Add to Posts</h3>
+      <%= f.collection_check_boxes :post_ids, Post.where(user: current_user), :id, :title do |cb| %>
+        <div class="flex  gap-3">
+          <div class="items-center">
+            <%= cb.check_box %>
+            <%= cb.label class:"text-sm text-gray-700 font-semibold" %>
+          </div>
+          <%= link_to dashboard_topic_path(cb.value), class:"ml-2 p-1 rounded-full text-xs font-medium bg-white shadow" do %>
+            <%= phosphor_icon "arrow-u-up-right", class: "h-4 w-4 text-indigo-500" %>
+          <% end %>
+        </div>
+      <% end %>
+  </div>

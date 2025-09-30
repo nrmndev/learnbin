@@ -73,3 +73,43 @@ PRIORITY 2
   - FLASH TURBO
   - Discover Page
   - TAG and Category Association
+
+
+-----------------------------------------------------
+CHECKLIST
+Collections
+ - Create WORKING see: form [:dashboard, @collection]
+ - Update WORKING see: form [:dashboard, @collection]
+ - Topic in Collection Up/Down WORKING see collection_topics_controller
+
+Topics
+ - Create WORKING see: form [:dashboard, @topic]
+ - Update WORKING see: [:dashboard, @topic]
+ - Add to Collection WORKING
+ - Post in Topics Up/Down WORKING
+
+Posts
+ - Create WORKING
+ - Update WORKING
+ - Add to Topic WORKING
+ - Parts in Posts Up/Down WORKING
+
+Parts
+ - Create WORKING
+ - Update WORKING
+ - Add to Post WORKING
+
+-----------------
+TODO
+ MAJOR RESPONSIVE DESIGN
+
+ TOPIC FRONT END
+ - PREV / NEXT
+ - ENHANCED PREV NEXT, IF THERE IS NEXT POST JUMP TO THAT
+
+ TABLES
+  - try implement onchange
+  - add sort by: "date updated, title" ASC/DESC
+  - RESTYLE PAGINATION
+
+ ROOT -> /norman

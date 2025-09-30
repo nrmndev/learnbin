@@ -2,10 +2,10 @@ class CreateCollections < ActiveRecord::Migration[7.1]
   def change
     create_table :collections do |t|
       t.string :title, null: false
-      t.string :slug, null: false
+      t.string :slug
       t.text   :description
       t.references :category, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: { to_table: :users }
+      t.references :user, null: false, foreign_key: true
       t.integer :visibility, default: 1
       t.timestamps
     end

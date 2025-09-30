@@ -1,0 +1,10 @@
+<%= render "dashboard/shared/layout" do %>
+ <%= render "shared/breadcrumbs", links: [
+      { text: "All Parts", url: dashboard_parts_path },
+      { text: "Creating a partt"}
+    ]
+  %>
+  <%= render "dashboard/shared/title", title: "Creating new post" %>
+  <%= render "form"  %>
+
+<% end %>

@@ -21,7 +21,7 @@ module Dashboard
       @collection.user_id = current_user.id
 
       if @collection.save!
-       # redirect_to dashboard_collections_path, notice: "Collection created"
+        redirect_to dashboard_collections_path, notice: "Collection created"
       else
         # re‑render the view that has the modal, ensure @topic is not nil
         render :index
@@ -58,7 +58,7 @@ module Dashboard
       @collections = Collection
                 .where(user_id: current_user)
                 .order(title: :asc)
-                .paginate(page: params[:page], per_page: 5)
+                .paginate(page: params[:page], per_page: 20)
     end
 
     def set_collection

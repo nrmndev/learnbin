@@ -11,14 +11,14 @@
 
     <div class="grid grid-cols-2 gap-5 p-5">
     <% if @prev_part %>
-      <%= link_to username_topic_post_part_path(@part.post.user.username, @prev_part.post.topics.first, @prev_part.post_id, @prev_part.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2", data: { turbo_frame: "article_frame" } do %>
+      <%= link_to username_topic_post_part_path(@part, @prev_part, @prev_part, @prev_part.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2", data: { turbo_frame: "article_frame" } do %>
         <span>← Previous </span>
         <span><%= @prev_part.title %></span>
       <% end %>
     <% end %>
 
     <% if @next_part %>
-      <%= link_to username_topic_post_part_path(@part.post.user.username, @next_part.post.topics.first, @next_part.post, @next_part.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2 text-right", data: { turbo_frame: "article_frame" } do %>
+      <%= link_to username_topic_post_part_path(@part, @next_part, @next_part, @next_part.id), class: "flex flex-col gap-1 border border-gray-400 bg-gray-100 p-2 text-right", data: { turbo_frame: "article_frame" } do %>
         <span>Next →</span>
         <span><%= @next_part.title %></span>
       <% end %>

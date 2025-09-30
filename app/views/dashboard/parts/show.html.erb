@@ -3,22 +3,26 @@
 <% end %>
 
 <%= render "dashboard/shared/layout" do %>
-  <%= render "shared/breadcrumbs", links: [
-      { text: @post.title, url: dashboard_post_path(@post) },
+    <%= render "shared/breadcrumbs", links: [
+      { text: "All Parts", url: dashboard_parts_path },
       { text: @part.title}
     ]
   %>
   <%= render "dashboard/shared/title", title: @part.title %>
 <div class="container mx-auto">
-  <%= simple_form_for [@post, @part], url: dashboard_post_part_path(@post, @part) do |f| %>
-    <%= f.input :title %>
-    <div class="rounded-md bg-white px-3 pt-2.5 pb-1.5 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600 mb-2 string optional topic_name">
-      <label class="block text-xs font-medium text-gray-900 string optional block text-sm/6 font-medium text-gray-900 mb-2" for="topic_name">Description</label>
-      <div data-controller="tinymce" class="mb-2">
-        <%= f.text_area :description, rows: 15, data: { tinymce_target: "textarea" } %>
+    <%= simple_form_for [:dashboard, @part] do |f| %>
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="col-span-2">
+          <%= render "dashboard/parts/show/form_part", f:f  %>
+        </div>
+
+        <div class="col-span-1">
+          <%= render "dashboard/parts/show/add_to_posts", f:f %>
+        </div>
       </div>
     </div>
-    <%= f.submit class: "cursor-pointer rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  <%# END OF SIMPLE_FORM%>
   <% end %>
 </div>
 <% end %>

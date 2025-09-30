@@ -1,4 +1,4 @@
-<%= simple_form_for @topic, url: dashboard_topics_path, validate: true do |f| %>
+<%= simple_form_for [:dashboard, @topic], validate: true do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.submit %>

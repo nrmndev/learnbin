@@ -8,7 +8,7 @@ module DashboardSectionTracking
   private
 
   def set_dashboard_section
-    dashboard_pages = %w[archives activity collections dashboard posts settings topics usage]
+    dashboard_pages = %w[archives activity collections dashboard posts settings topics usage parts]
     @is_dashboard_page = dashboard_pages.include?(controller_name)
     @section = controller_name # or a custom mapping
   end

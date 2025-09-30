@@ -1,15 +1,21 @@
 class Post < ApplicationRecord
-  extend FriendlyId
+  # extend FriendlyId
+  # friendly_id :title, use: [:slugged, :scoped]
   include Visibility
   belongs_to :user
-  friendly_id :title, use: [:slugged, :scoped], scope: :user
 
-  has_many :parts, -> { order(:position) }, dependent: :destroy
-  has_many :topic_posts, dependent: :destroy
+  # Topic-Post Relation
+  has_many :topic_posts, -> { order(:position) }, dependent: :destroy
   has_many :topics, through: :topic_posts
+
+  # Post-Part Relation
+  has_many :post_parts, -> { order(:position) }, dependent: :destroy
+  has_many :parts, through: :post_parts
+
+
   validates :title, presence: true,
     length: {
-    minimum: 6,
+    minimum: 5,
     maximum: 50,
     too_short: "must be at least %{count} characters",
     too_long: "must be at most %{count} characters"
