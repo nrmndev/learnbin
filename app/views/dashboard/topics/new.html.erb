@@ -1,0 +1,10 @@
+<%= render "dashboard/shared/layout" do %>
+ <%= render "shared/breadcrumbs", links: [
+      { text: "All Topics", url: dashboard_topics_path },
+      { text: "Creating a topic"}
+    ]
+  %>
+  <%= render "dashboard/shared/title", title: "Creating new topic" %>
+  <%= render "form"  %>
+
+<% end %>

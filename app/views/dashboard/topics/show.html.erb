@@ -4,10 +4,10 @@
 <%= render "dashboard/shared/layout" do %>
   <%= render "shared/breadcrumbs", links: [
       { text: "All Topics", url: dashboard_topics_path },
-      { text: @topic.title}
+      { text: "Visit #{@orig_topic.title} Front Page", url: username_topic_path(@orig_topic.user.username, @orig_topic), turbo_frame: "_top" }
     ]
   %>
-  <%= render "dashboard/shared/title", title: @topic.title %>
+  <%= render "dashboard/shared/title", title: @old_title %>
   <%= simple_form_for @topic, url: dashboard_topic_path(@topic) do |f| %>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
       <!-- CONTENT -->

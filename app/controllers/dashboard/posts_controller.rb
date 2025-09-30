@@ -6,22 +6,31 @@ module Dashboard
     before_action :set_post, only: %i[show update]
     before_action :set_active_link
     # /dashboard/posts
-    def index; end
+    def index
+      if params[:search].present?
+        @posts = @posts.search_by_title(params[:search])
+      end
+
+    end
 
     def show
       @part = Part.new # need for (add part button)
     end
 
+    def new
+      @post = Post.new
+    end
+
+    def create
+      @post = Post.new(post_params)
+      @post.user = current_user
+      @post.save!
+      redirect_to dashboard_posts_path
+    end
     # /dashboard/posts/:id (update post button)
     def update
-      if @post.update!(post_params)
-        flash.now[:notice] = "Post updated successfully!"
-        render turbo_stream: [
-          turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @post.title }),
-          # turbo_stream.append("flash", partial: "layouts/flash")
-        ]
-        # redirect_to dashboard_post_path(@post), notice: "part updated!"
-      end
+      @post.update!(post_params)
+      redirect_to dashboard_posts_path
     end
 
     # /dashboard/posts/new (create post button)
@@ -38,12 +47,17 @@ module Dashboard
 
     # /dashboard/posts/:id
     def set_post
+      #@post = Post.friendly.find(params[:id])
       @post = Post.find(params[:id])
     end
 
     # /dashboard/posts
     def set_posts
-      @posts = Post.where(user: current_user)
+      @posts = Post
+              .where(user_id: current_user.id)
+              .order(title: :asc)
+              .paginate(page: params[:page], per_page: 5)
+
       @topic_posts = @posts.includes(:topics).all
     end
 

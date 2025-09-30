@@ -9,6 +9,6 @@ class CreateTopics < ActiveRecord::Migration[7.1]
       t.integer :visibility, default: 1
       t.timestamps
     end
-    add_index :topics, :slug
+    add_index :topics, [:user_id, :slug], unique: true
   end
 end

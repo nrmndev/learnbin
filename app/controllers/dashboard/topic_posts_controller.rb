@@ -17,6 +17,7 @@ module Dashboard
     private
 
     def set_topic
+      #@topic = Topic.friendly.find(params[:topic_id])
       @topic = Topic.find(params[:topic_id])
     end
   end

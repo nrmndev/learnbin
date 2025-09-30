@@ -19,7 +19,7 @@
                   <ul class="mt-1 px-2 list-disc list-inside">
                     <% post.parts.each do |part| %>
                         <li>
-                          <%= link_to part.title, user_topic_post_part_path(@topic.user_id, @topic, post, part), data: { turbo_frame: "content_frame" } %>
+                          <%= link_to part.title, username_topic_post_part_path(@topic.user.username, @topic, post, part), data: { turbo_frame: "content_frame" } %>
                         </li>
                         </li>
                     <% end %>
@@ -28,7 +28,7 @@
                 </ul>
 
             <% else %>
-                <%= link_to post.title, user_topic_post_path(@topic.user_id,@topic, post), data: { turbo_frame: "article_frame" }, class: "flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50" %>
+                <%= link_to post.title, username_topic_post_path(@topic.user.username, @topic, post), data: { turbo_frame: "article_frame" }, class: "flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50" %>
             <% end %>
           <% end  %>
         </ul>

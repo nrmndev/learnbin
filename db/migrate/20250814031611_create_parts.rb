@@ -3,6 +3,7 @@ class CreateParts < ActiveRecord::Migration[7.1]
     create_table :parts do |t|
       t.string :title, null: false
       t.text   :description
+      t.string :slug
       t.references :post, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.integer :position  # for ordering parts if needed

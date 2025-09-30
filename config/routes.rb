@@ -90,16 +90,25 @@ Rails.application.routes.draw do
   #     end
   #   end
   # end
-  get '/:user', to: 'users#show', param: :username, as: :user
+  get '/:username', to: 'users#show', param: :username, as: :username
+  get '/:username/about', to: 'about#index'
   get '/topic', to: 'topics#index', as: :topic_search
 
-  scope ':user', module: 'users', param: :username, as: :user do
+  scope ':username', module: 'users', param: :username, as: :username,
+  constraints: { username: /[A-Za-z][A-Za-z0-9_\-]*/ } do
     resources :topics do
       resources :posts do
         resources :parts do
-
         end
       end
+    end
+    resources :collections do
+      resources :topics do
+
+      end
+    end
+    resources :abouts do
+
     end
   end
 

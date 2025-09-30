@@ -44,10 +44,12 @@ module Users
     private
 
     def set_post
+      #@post = Post.friendly.find(params[:post_id])
       @post = Post.find(params[:post_id])
     end
 
     def set_part
+      #@part = @post.parts.friendly.find(params[:id])
       @part = @post.parts.find(params[:id])
     end
 

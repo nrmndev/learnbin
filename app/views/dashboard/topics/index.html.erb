@@ -8,7 +8,16 @@
     <%= link_to new_dashboard_topic_path, class:"inline-flex items-center btn-primary"  do %>
       <%= phosphor_icon "plus", class:"h-4 w-4 text-white"%> Create Topic
     <% end  %>
+
   </div>
+
+  <div class="my-2 mb-3">
+    <%= form_with url: dashboard_topics_path, method: :get, local: true do |f| %>
+      <%= f.text_field :search, value: params[:search], placeholder: "Search by keyword", class: "pb-1 outline-none border-b border-gray-400" %>
+      <%= f.submit "Search", name: nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+    <% end %>
+  </div>
+
   <div class="flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -17,7 +26,6 @@
             <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
-                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Tags</th>
                 <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Attached to Collections</th>
                 <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
               </tr>
@@ -29,9 +37,7 @@
                   <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
                     <%= topic.title  %>
                   </td>
-                  <td class= "py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
-                    Web Development, Ruby on rails
-                  </td>
+
                   <td class= "py-4 pr-3 pl-4 text-sm font-medium sm:pl-6">
                     <div class="">
                       <% topic.collections.each do |collection| %>
@@ -49,17 +55,21 @@
                             <%= phosphor_icon "trash", class: "h-5 w-5 text-red-500" %>
                     <% end %>
 
-                    <%= link_to user_topic_path(current_user.name,topic.id), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "_top" }  do %>
+                    <%= link_to username_topic_path(current_user.username,topic), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "_top" }  do %>
                       <%= phosphor_icon "arrow-arc-right", class: "h-4 w-4 text-indigo-600" %>
                     <% end  %>
                   </td>
                 </tr>
-              <% end %>
+              <% end %><%# END @topics.each  %>
             </tbody>
+
           </table>
+          <div class="flex justify-center">
+            <%= will_paginate @topics  %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-<% end %>
+<% end %> <%# END render "dashboard/shared/layout"  %>

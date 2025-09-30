@@ -1,6 +1,7 @@
 
-  class UsersController < ApplicationController
-    before_action :set_user, only: %i[index]
+  class UsersController < Users::BaseController
+    before_action :set_user, only: %i[show]
+    before_action :set_active_link, only: %i[show]
 
     def index
       unless @user
@@ -15,7 +16,13 @@
 
     def set_user
       if params[:username]
-        @user = User.find_by(name: params[:name])
+        @user = User.where(username: params[:username]).first
       end
     end
+
+    def set_active_link
+      @active_link = 'users'
+    end
+
+
   end

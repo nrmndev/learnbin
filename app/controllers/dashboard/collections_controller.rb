@@ -1,27 +1,25 @@
 module Dashboard
   class CollectionsController < Dashboard::BaseController
     before_action :set_collection, only: %i[show update]
+    before_action :set_collections, only: %i[index]
     before_action :set_active_link
     # /dashboard/topics
     def index
-      # @topics = Topic.all
-      # @posts = Post.none
-      @grouped_cts = CollectionTopic.includes(:topic).all.group_by(&:collection_id)
-      # Optionally load collections so you can show collection titles
-      @collections = Collection.where(id: @grouped_cts.keys).index_by(&:id)
-      @topics = Topic.all
+      if params[:search].present?
+        @collections = @collections.user_page_search(params[:search])
+      end
     end
 
     def show; end
 
     def new
       @collection = Collection.new
-      @collection.user_id = current_user.id
     end
 
     def create
       @collection = Collection.new(collection_params)
       @collection.user_id = current_user.id
+
       if @collection.save!
        # redirect_to dashboard_collections_path, notice: "Collection created"
       else
@@ -31,15 +29,8 @@ module Dashboard
     end
 
     def update
-      if @collection.update(collection_params)
-        flash.now[:notice] = "Collection updated successfully!"
-        render turbo_stream: [
-          turbo_stream.replace("turbo_dashboard_edit_title", partial: "dashboard/shared/title", locals: { title: @collection.title }),
-          # turbo_stream.append("flash", partial: "layouts/flash")
-        ]
-      else
-        render :edit
-      end
+      @collection.update(collection_params)
+      redirect_to dashboard_collections_path
     end
 
     def show
@@ -62,9 +53,18 @@ module Dashboard
 
     private
 
+
+    def set_collections
+      @collections = Collection
+                .where(user_id: current_user)
+                .order(title: :asc)
+                .paginate(page: params[:page], per_page: 5)
+    end
+
     def set_collection
-      @user_collection = Collection.all
-      @collection = @user_collection.includes(:topics).find(params[:id])
+      #@user_collection = Collection.friendly.find(params[:id])
+      @user_collection = Collection.find(params[:id])
+      @collection = @user_collection
       # optional: maybe only visible topics, or some scope
       @topics_for_sidebar = @collection.collection_topics
     end
@@ -73,8 +73,9 @@ module Dashboard
       @active_link = 'collections'
     end
 
+
     def collection_params
-      params.require(:collection).permit(:title, :visibility, :category_id, :slug, :description)
+      params.require(:collection).permit(:title, :visibility, :category_id, :description)
     end
   end
 end

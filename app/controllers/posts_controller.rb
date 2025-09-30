@@ -8,20 +8,20 @@ class PostsController < ApplicationController
 
   def show; end
 
-  def new
-    @post = @topic.posts.new
-  end
+  # def new
+  #   @post = @topic.posts.new
+  # end
 
 
-  def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+  # def create
+  #   @post = Post.new(post_params)
+  #   @post.user_id = current_user.id
 
-    if @post.save!
-      redirect_to dashboard_posts_path, notice: "post created!"
+  #   if @post.save!
+  #     redirect_to dashboard_posts_path, notice: "post created!"
 
-    end
-  end
+  #   end
+  # end
 
   def edit; end
 
@@ -42,6 +42,7 @@ class PostsController < ApplicationController
 
 
   def set_post
+    #@post = Post.friendly.find(params[:id])
     @post = Post.find(params[:id])
   end
 

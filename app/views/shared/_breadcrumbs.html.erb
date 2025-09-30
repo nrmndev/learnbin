@@ -1,4 +1,3 @@
-<%# locals: (links: []) -%>
 <nav aria-label="Breadcrumb" class="flex">
   <ol role="list" class="flex items-center text-sm font-medium text-gray-500">
   <% links.each_with_index do |link, index| %>
@@ -7,7 +6,11 @@
     <% end %>
     <li class="flex items-center">
       <% if link[:url] %>
-        <%= link_to link[:text], link[:url]  %>
+        <% html_opts = {} %>
+        <% if link[:turbo_frame].present? %>
+          <% html_opts[:data] = { turbo_frame: link[:turbo_frame] } %>
+        <% end %>
+        <%= link_to link[:text], link[:url], html_opts %>
       <% else %>
         <%= link[:text] %>
       <% end %>

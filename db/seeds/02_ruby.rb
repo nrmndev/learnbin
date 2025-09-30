@@ -3,11 +3,11 @@ collection = Collection.find_by(title:"Ruby on Rails")
 category = Category.find_by(title: 'Programming', slug: 'programming')
 pp 'Creating Ruby on Rails topic'
 # Add topics to it
-topic = Topic.new(title: 'Ruby on Rails', slug: 'ruby-on-rails', user: norman, visibility: 0)
+topic = Topic.new(title: 'Quick brown fox jumps over the', user: norman, visibility: 0)
 topic.user_id = norman.id
 topic.save!
 
-topic_2 = Topic.new(title: 'Best Practices', slug: 'useful-gems', user: norman, visibility: 0)
+topic_2 = Topic.new(title: 'Best Practices', user: norman, visibility: 0)
 topic_2.user_id = norman.id
 topic_2.save!
 

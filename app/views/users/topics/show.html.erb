@@ -1,6 +1,12 @@
 
 
 <%= render "shared/page_heading", heading: @topic.title  %>
+<%# @topic.inspect  %>
+<% if @topic.user == current_user  %>
+  <%= link_to dashboard_topic_path(@topic), class:"flex text-indigo-600 cursor-pointer p-2 m-2" do %>
+    <%= phosphor_icon "pencil" %> Edit
+  <% end %>
+<% end %>
 <div class="grid grid-cols-4 gap-3 p-4">
   <div class="col-span-1">
     <%= render "sidebar", topic: @topic %>
@@ -8,28 +14,11 @@
   <div class="col-span-3">
     <%= turbo_frame_tag "content_frame" do %>
       <%= sanitize(
-      highlight_code(@topic.description),
-      tags: %w[div span button pre code br table tbody th tr td ul ol li h2 h3 em ],
-      attributes: %w[class data-controller data-action data-lang]
-    )
-%>
-
+        highlight_code(@topic.description),
+        tags: %w[div span button pre code br table tbody th tr td ul ol li h2 h3 em ],
+        attributes: %w[class data-controller data-action data-lang]
+      )
+    %>
     <% end %>
   </div>
 </div>
-
-
-
-<!--
-<h1><%# @topic.name %></h1>
-<%# link_to 'Back to Topics', topics_path %>
-<h2>Articles</h2>
-<%# link_to 'New Article', new_topic_article_path(@topic), class: 'btn btn-primary' %>
-
-<ul>
-  <%# @topic.articles.each do |article| %>
-    <li>
-      <%# link_to article.title, topic_article_path(@topic, article) %>
-    </li>
-  <%# end %>
-</ul>-->

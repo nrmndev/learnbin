@@ -26,13 +26,13 @@ class PartsController < ApplicationController
 
   def edit; end
 
-  def update
-    if @part.update(part_params)
-      redirect_to dashboard_post_part_path(@part.post_id), notice: "part updated!"
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @part.update(part_params)
+  #     redirect_to dashboard_post_part_path(@part.post_id), notice: "part updated!"
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
     @part.destroy
@@ -43,11 +43,14 @@ class PartsController < ApplicationController
   private
 
   def set_post
+    #@post = Post.friendly.find(params[:post_id])
     @post = Post.find(params[:post_id])
   end
 
   def set_part
-    @part = @post.parts.find(params[:id])
+    #post = Post.friendly.find(params[:post_id])
+    post = Post.find(params[:post_id])
+    @part = post.parts
   end
 
   def part_params

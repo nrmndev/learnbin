@@ -1,13 +1,10 @@
 
 
-<%= simple_form_for @post, url: dashboard_post_path(@post) do |f| %>
+<%= simple_form_for @post, url: dashboard_posts_path do |f| %>
  <div class="col-span-full">
     <%# <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Title</label> %>
     <div class="mt-2">
       <%= f.input :title %>
-    </div>
-    <div class="mt-2">
-      <%= f.input :slug %>
     </div>
     <%= render "dashboard/shared/form_field_description", f:f  %>
 

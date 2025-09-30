@@ -87,3 +87,6 @@ gem "phosphor_icons"
 gem 'acts-as-taggable-on'
 
 gem 'faker'
+gem 'will_paginate'
+gem 'friendly_id', '~> 5.5.0'
+gem 'client_side_validations'
