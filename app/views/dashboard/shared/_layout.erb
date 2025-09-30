@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "dashboard_content" do %>
+  <%= render "dashboard/shared/top_nav"  %>
+  <%= render "dashboard/shared/side_nav"  %>
+  <div class="xl:pl-72">
+    <%= yield :above %>
+    <%= capture do %>
+      <div class="p-3">
+      <%= yield  %>
+      </div>
+    <% end %>
+    <%= yield :below %>
+  </div>
+<% end %>

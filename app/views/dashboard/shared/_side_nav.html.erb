@@ -1,0 +1,160 @@
+
+<el-dialog>
+  <dialog id="sidebar" class="backdrop:bg-transparent xl:hidden">
+    <el-dialog-backdrop class="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
+
+    <div tabindex="0" class="fixed inset-0 flex focus:outline-none">
+      <el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
+        <div class="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out group-data-closed/dialog-panel:opacity-0">
+          <button type="button" command="close" commandfor="sidebar" class="-m-2.5 p-2.5">
+            <span class="sr-only">Close sidebar</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 text-white">
+              <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sidebar component, swap this element with another sidebar if you like -->
+        <div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6">
+          <div class="relative flex h-16 shrink-0 items-center">
+            <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="h-8 w-auto" />
+          </div>
+          <nav class="relative flex flex-1 flex-col">
+            <ul role="list" class="flex flex-1 flex-col gap-y-7">
+              <li>
+                <ul role="list" class="-mx-2 space-y-1">
+                  <li>
+                    <!-- Current: "bg-gray-100 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-100" -->
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600">
+                        <path d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      Collections
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600">
+                        <path d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      Activity
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600">
+                        <path d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      Usage
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="group flex gap-x-3 rounded-md bg-gray-100 p-2 text-sm/6 font-semibold text-indigo-600">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 shrink-0 text-indigo-600">
+                        <path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      Settings
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="text-xs/6 font-semibold text-gray-400">Your teams</div>
+                <ul role="list" class="-mx-2 mt-2 space-y-1">
+                  <li>
+                    <!-- Current: "bg-gray-100 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-100" -->
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+                      <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">P</span>
+                      <span class="truncate">Planetaria</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+                      <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">P</span>
+                      <span class="truncate">Protocol</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
+                      <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">T</span>
+                      <span class="truncate">Tailwind Labs</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="-mx-6 mt-auto">
+                <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">
+                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5" />
+                  <span class="sr-only">Your profile</span>
+                  <span aria-hidden="true">Tom Cook</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
+
+<!-- Static sidebar for desktop -->
+<div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
+  <!-- Sidebar component, swap this element with another sidebar if you like -->
+  <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6 ring-1 ring-gray-200">
+    <div class="flex h-16 shrink-0 items-center">
+      <%= render "shared/logo"  %>
+    </div>
+    <nav class="flex flex-1 flex-col">
+      <ul role="list" class="flex flex-1 flex-col gap-y-7">
+        <li>
+          <ul role="list" class="-mx-2 space-y-1">
+            <li>
+              <!-- Current: "bg-gray-100 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-100" -->
+              <%= link_to dashboard_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "dashboard" ? "text-indigo-600" : "text-gray-600"}" do %>
+                <%= phosphor_icon "house", class: "group-hover:text-indigo-600" %>
+                Dashboard Home
+              <% end %>
+            </li>
+            <li>
+              <!-- Current: "bg-gray-100 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-100" -->
+              <% archive_active_sections = ["archives", "topics", "collections", "posts", "bookmarks"] %>
+              <%= link_to dashboard_archives_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{archive_active_sections.include?(@section) ? "text-indigo-600" : "text-gray-600"}" , data: { turbo_frame: "dashboard_content", }  do %>
+                <%= phosphor_icon "folder", class: "group-hover:text-indigo-600"  %>
+                Archives
+              <% end %>
+            </li>
+            <li>
+              <%= link_to dashboard_activity_index_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "activity" ? "text-indigo-600" : "text-gray-600"}", data: { turbo_frame: "dashboard_content" }  do %>
+                <%= phosphor_icon "cell-signal-full", class: "group-hover:text-indigo-600"  %>
+                Activity
+              <% end %>
+            </li>
+            <li>
+              <%= link_to dashboard_usage_index_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "usage" ? "text-indigo-600" : "text-gray-600"}", data: { turbo_frame: "dashboard_content" } do %>
+                <%= phosphor_icon "chart-bar", class: "group-hover:text-indigo-600"  %>
+                Usage
+              <% end %>
+            </li>
+            <li>
+              <%= link_to dashboard_settings_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 #{@section == "settings" ? "text-indigo-600" : "text-gray-600"}", data: { turbo_frame: "dashboard_content" } do %>
+                <%= phosphor_icon "gear", class: "group-hover:text-indigo-600"  %>
+                Settings
+              <% end %>
+            </li>
+
+          </ul>
+        </li>
+
+        <li class="-mx-6 mt-auto">
+          <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5" />
+            <span class="sr-only">Your profile</span>
+            <span aria-hidden="true">Tom Cook</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

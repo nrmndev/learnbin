@@ -1,0 +1,27 @@
+
+
+<% content_for :above do %>
+  <%= render "dashboard/shared/archives_top_menu" %>
+<% end %>
+
+<%= render "dashboard/shared/layout" do %>
+  <%= render "shared/breadcrumbs", links: [
+      { text: "All Collections", url: dashboard_collections_path },
+      { text: @collection.title}
+    ]
+  %>
+  <%= render "dashboard/shared/title", title: @collection.title %>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+    <!-- CONTENT -->
+    <div class="col-span-2">
+        <%= render "form"  %>
+    </div>
+    <!-- END CONTENT -->
+    <!-- SIDE BAR -->
+    <div class="col-span-1 flex flex-col gap-3 bg-white">
+      <%= render "dashboard/collections/topics_in_this_collection"  %>
+    </div>
+    <!-- END SIDE BAR -->
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+  <div>
+  <div class="relative flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+    <nav class="relative flex flex-1 flex-col">
+      <ul role="list" class="flex flex-1 flex-col gap-y-7">
+        <li>
+          <ul role="list" class="-mx-2 space-y-1">
+            <li>
+              <%= link_to username_collections_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 " , data: { turbo_frame: "turbo_users_content", }  do %>
+                <%= phosphor_icon "user", class: "group-hover:text-indigo-600"  %>
+                About
+              <% end %>
+            <li>
+            </li>
+            <li>
+            <%= link_to username_collections_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 " , data: { turbo_frame: "turbo_users_content", }  do %>
+                <%= phosphor_icon "book-open-text", class: "group-hover:text-indigo-600"  %>
+                Collections
+              <% end %>
+            <li>
+            <li>
+            <%= link_to username_topics_path, class: "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600 " , data: { turbo_frame: "turbo_users_content", }  do %>
+                <%= phosphor_icon "signpost", class: "group-hover:text-indigo-600"  %>
+                Topics
+              <% end %>
+              </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  </div>

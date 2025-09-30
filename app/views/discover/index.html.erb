@@ -2,41 +2,74 @@
 
 
 
+<%# = params.inspect  %>
 <section class="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
-    <div class="px-4 mx-auto max-w-screen-xl text-center py-12 lg:py-12">
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Feed Your Curiosity, Expand Your Mind</h1>
-        <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Search Topics That Spark Your Curiosity.</p>
-        <div class="max-w-128 mx-auto flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-          <%= simple_form_for :search, url: discover_index_path,
+  <div class="px-4 mx-auto max-w-screen-xl text-center py-12 lg:py-12">
+    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Feed Your Curiosity, Expand Your Mind</h1>
+    <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Search Topics That Spark Your Curiosity.</p>
+    <div class="max-w-128 mx-auto">
+        <!--<%# = simple_form_for :search, url: discover_index_path,
+          method: :get, html: { data: { turbo_frame: "topics_search" },
+          wrapper: false, class:"flex flex-row gap-4 w-full  w-128" } do |f| %>
+          <div class="absolute grid grid-cols-1">
+             <%# = f.select :search_by, [["User", "user"], ["Topic", "topic"], ["Collection","collection"]],
+            { include_blank: "Select type" }, { selected: params[:search_by] || "user"} %>
+          </div>
+          <div class="pt-8 pb-3 px-3 bg-white flex">
+            <%# = f.input :q, wrapper: false, placeholder: "Ruby on Rails", label: false, input_html: {class: "block w-full rounded-md bg-white  text-base text-gray-900 outline-none placeholder:text-gray-400 sm:text-sm/6"} %>
+            <div class="inline-flex text-sm items-center">
+              <%# = phosphor_icon "magnifying-glass", class:"w-4 h-4" %>Search
+            </div>
+          </div>
+        <%# end %> -->
+
+        <%= form_tag(discover_index_path, method: :get, data: { turbo: false }, class: "bg-white border border-gray-300 shadow-xl p-3 flex space-x-4 items-center") do %>
+          <%= select_tag :search_by, options_for_select([["User", "user"], ["Topic", "topic"], ["Collection", "collection"]], params[:search_by]) %>
+          <%= text_field_tag :q, params[:q], placeholder: "Enter keyword…", class:"grow outline-none border-b border-gray-200" %>
+          <%= submit_tag "Search", name: nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+        <% end %>
+  </div>
+</div>
+
+          <%# = simple_form_for :search, url: discover_index_path,
               method: :get, html: { data: { turbo_frame: "topics_search" },
               wrapper: false, class:"flex flex-row gap-4 w-full" } do |f| %>
-            <%= f.input :q, wrapper: false, label: false, input_html: {class: "border border-white rounded-xl text-white p-3"} %>
-            <%= f.button :submit, "Search" %>
-          <% end %>
+            <%# = f.input :q, wrapper: false, label: false, input_html: {class: "border border-white rounded-xl text-white p-3"} %>
+            <%# = f.button :submit, "Search" %>
+          <%# end %>
 
         </div>
     </div>
 </section>
 
-<%= turbo_frame_tag "topics_search" do %>
-<div class="container mx-auto my-4">
-  <ul class="grid grid-cols-4 md:grid-cols-6 gap-3">
-      <li class="rounded-md border border-gray-200 bg-white p-3">
-        <a href="#" class="font-medium text-gray-900 hover:text-gray-600 flex flex-col gap-2">
-          Ruby on Rails
-          <div>
-            <p class="flex items-center gap-x-2 text-sm text-gray-500"><%= phosphor_icon "pencil-line", class: "h-4 w-4 text-blue-500" %>  Norman </p>
-          </div>
-          <div class="flex gap-1 justify-left items-center text-xs text-gray-500">
-            <%= phosphor_icon "eye", class: "h-4 w-4 text-blue-500" %>15k
-            <%= phosphor_icon "star", class: "h-4 w-4 text-yellow-500" %>100
-          </div>
-        </a>
-      </li>
-      <li class="rounded-md border border-gray-200 bg-white p-3">
-        Ruby on Rails by Norman
-      </li>
-  </ul>
+<% @results.inspect  %>
+<% if @results.any? %>
+<div class="bg-white py-4">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="styled-border-b">
+      <h2 class="text-2xl font-semibold tracking-tight text-pretty text-gray-900">Search results for (<%= params[:search_by]  %>): <%= params[:q]  %> </h2>
+    </div>
+    <div class="mt-2 grid gap-x-8 gap-y-16 pt-2">
+      <% @results.each do |r| %>
+        <% if r.is_a?(Topic) %>
+          <%= render "discover/search_results/topic"  %>
+      <% elsif r.is_a?(User) %>
+        <ul role="list" class="grid grid-cols-6 gap-x-8 gap-y-2 text-center">
+          <%= render "discover/search_results/user"  %>
+        </ul>
+      <% elsif r.is_a?(Collection) %>
+        <div class="grid grid-cols-3">
+          <%= render "discover/search_results/collection", r:r  %>
+        </div>
+      <% else %>
+      <% end %>
+    <% end %>
+
+    </div>
   </div>
-  <%= render "discover/search_results", topics: @topics   %>
+</div>
+
+<% else %>
 <% end %>
+
+  <%= render "discover/default_content"  %>

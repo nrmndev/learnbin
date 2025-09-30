@@ -1,0 +1,66 @@
+
+<% content_for :above do %>
+  <%= render "dashboard/shared/archives_top_menu"  %>
+<% end %>
+
+<%= render "dashboard/shared/layout" do %>
+  <div class="flex styled-border-b">
+    <h2 class="text-4xl grow">Collections</h2>
+    <%= link_to new_dashboard_collection_path, class:"inline-flex items-center btn-primary"  do %>
+      <%= phosphor_icon "plus", class:"h-4 w-4 text-white"%> Create Collection
+    <% end  %>
+  </div>
+
+    <div class="my-2 mb-3">
+    <%= form_with url: dashboard_collections_path, method: :get, local: true do |f| %>
+      <%= f.text_field :search, value: params[:search], placeholder: "Search by keyword", class: "pb-1 outline-none border-b border-gray-400" %>
+      <%= f.submit "Search", name: nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+    <% end %>
+  </div>
+
+  <div class="flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow-sm outline-1 outline-black/5 sm:rounded-lg">
+          <table class="relative min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
+                <th scope="col" class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white text-gray-700">
+
+              <% @collections.each do |collection|  %>
+                <tr>
+                  <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
+                    <%= collection.title  %>
+                  </td>
+
+                  <td class="flex gap-2 py-3.5 pr-3 pl-4">
+                    <%= link_to dashboard_collection_path(collection.id), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "dashboard_content" }  do %>
+                      <%= phosphor_icon "pencil", class: "h-4 w-4 text-indigo-600" %>
+                    <% end  %>
+                    <%= button_to dashboard_collection_path(collection.id),
+                          method: :delete, data: { turbo_method: :delete, turbo_confirm: "You are about to delete a topic, are you sure? Posts associated to this topic WILL NOT be deleted"},
+                          class: "p-2 bg-white shadow rounded-full" do %>
+                            <%= phosphor_icon "trash", class: "h-5 w-5 text-red-500" %>
+                    <% end %>
+
+                    <%= link_to username_collection_path(current_user.username, collection), class: "p-2 bg-white shadow rounded-full", data: { turbo_frame: "_top" }  do %>
+                      <%= phosphor_icon "arrow-arc-right", class: "h-4 w-4 text-indigo-600" %>
+                    <% end  %>
+                  </td>
+                </tr>
+              <% end %><%# END @topics.each  %>
+            </tbody>
+
+          </table>
+          <div class="flex justify-center">
+            <%= will_paginate @collections  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

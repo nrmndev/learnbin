@@ -115,3 +115,22 @@ ul ul {
   margin: 0;
   overflow-x: auto;
 }
+
+@keyframes flash {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+  50% {
+    width: 50%;
+    opacity: 1;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+.animate-flash {
+  animation: flash 5s forwards;
+}

@@ -1,0 +1,75 @@
+Route: http://localhost:3000/dashboard
+Controller: Dashboard#index
+TASKS:
+  Create Collection
+
+Route: http://localhost:3000/dashboard/collections/1
+Controller: Dashboard::Collections#show
+TASKS:
+  Create Topic
+  Update: reload friendlyId
+
+Route: http://localhost:3000/dashboard/topics/:id
+Controller: Dashboard::Topics#show
+PAUSE - finalize form (Tags?)
+TASKS:
+  Create Post
+  Update: reload friendlyId
+
+Route: http://localhost:3000/dashboard/posts
+Controller: Dashboard::Posts#index
+TASKS:
+  Create Post
+  Update: reload friendlyId
+
+Route: http://localhost:3000/dashboard/posts/:id
+Controller: Dashboard::Posts#show
+PAUSE - Finalize Form (Tags?)
+TASKS:
+  Create Parts
+  Update: reload friendlyId
+
+
+
+
+PRIORITY 1
+ - Create new table PROFILE for USER relation
+    - primary profile image upload
+    - background image upload
+    - nickname (uniqueness)
+    - firstname lastname
+    - description
+
+ - Create Collections
+ - Create Topics
+ - Create Posts
+ - Create Parts
+
+ - Change TURBO Approach for :username switch case if
+
+  - User Page with actual Content
+    - Collections
+    4 About (Use Devise)
+
+  - Responsive Layout
+  - Proper Content
+  - User 404
+
+  - DASHBOARD SAVING OF TOPICS (REDIRECT UPON CHANGING TITLE)
+
+- DASHBOARD ORDERING OF TOPICS , POSTS, COLLECTION
+
+VALIDATION
+ - Collection (Unique title per user, char 5 - 60)
+
+ROUTING
+ - implement -> /:username,   block /:user_id
+ - redirect -> /:discover if not existing
+
+-------------------------------------------------------------
+
+PRIORITY 2
+  - User /discover/:user?
+  - FLASH TURBO
+  - Discover Page
+  - TAG and Category Association

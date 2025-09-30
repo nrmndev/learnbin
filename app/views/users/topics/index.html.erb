@@ -1,0 +1,61 @@
+  <%= turbo_frame_tag "turbo_users_content" do %>
+  <%= render "users/shared/tab_nav"  %>
+    <div class="p-4">
+
+      <h2 class="heading-underlined">Topics</h2>
+
+      <% if @topics %>
+        <div class="my-2 mb-3">
+          <%= form_with url: username_topics_path, method: :get, local: true do |f| %>
+            <%= f.text_field :search, value: params[:search], placeholder: "Search by keyword", class: "pb-1 outline-none border-b border-gray-400" %>
+            <%= f.submit "Search", name: nil, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+          <% end %>
+        </div>
+        <div class="grid grid-cols-4 gap-3 ">
+          <% @topics.each do |topic|  %>
+            <div class="border border-gray-300 rounded-xl shadow-lg p-2 flex flex-col">
+              <h2 class="heading-underlined <%= topic.visibility != "visible" ? "text-red-500!" : "" %>"><%= topic.title  %> </h2>
+              <% if topic.visibility != "visible"  %>
+                  <span class="text-red-500 text-sm flex items-center gap-x-2">
+                    <%= phosphor_icon "eye", class: "w-4 h-4"  %>
+                    Set to <%= topic.visibility %>, only you can see this topic.
+                  </span>
+              <% end  %>
+              <% if topic.posts  %>
+                <ul class="grow">
+                  <% topic.posts.order(position: :desc).limit(4).each do |post| %>
+                    <li class="flex items-center text-sm">
+                      <%= phosphor_icon "dot-outline", class: "group-hover:text-indigo-600"  %>
+                      <%= post.title  %>
+                    </li>
+                  <% end %><%# END topic.posts.each  %>
+                </ul>
+                <% if topic.posts.size > 4 %>
+                  <div class="flex flex-col text-xs items-center my-2 border-t border-gray-200">
+                    <span>Show More</span>
+                    <%= phosphor_icon "caret-double-down", class: "w-2 h-2 group-hover:text-indigo-600"  %>
+                  </div>
+                <% end %><%# END topic.posts.size > 5%>
+              <% end %><%# END topic.posts  %>
+                <div class="items-end">
+                  <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                      <a href="#" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent text-sm font-semibold text-gray-900">
+                        <%= phosphor_icon "share-fat", class: "h-4 w-4 text-blue-500" %> Share
+                      </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                      <%= link_to username_topic_path(topic.user.username, topic), data: {turbo_frame: "_top"}, class:"relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent text-sm font-semibold text-gray-900" do %>
+                        <%= phosphor_icon "eye", class: "h-4 w-4 text-indigo-600" %> View
+                      <% end  %>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          <% end %> <%# END @topics.each %>
+        </div>
+        <%= will_paginate @topics, class:"mt-3" %>
+      <% end %> <%# END if @topics %>
+    </div>
+  <% end %>

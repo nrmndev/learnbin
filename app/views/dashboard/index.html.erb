@@ -1,25 +1,14 @@
-<div class="container mx-auto">
+<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+<!--
+  This example requires updating your template:
 
-  <div class="grid grid-cols-3 gap-3">
-  <% @categories.each do |category|  %>
-
-      <%# locals: (heading: "", link: "") -%>
-
-  <div class="overflow-hidden rounded-lg bg-white shadow-sm">
-      <div class="px-2 py-3 sm:p-3">
-        <!-- Content goes here -->
-        <div class="grid gap-3">
-          <%= category.name  %>
-          <ul>
-          <% category.topics.each do |topic| %>
-            <li><%= link_to topic.name, category_topic_path(topic.category_id, topic.id)  %></li>
-          <% end  %>
-          </ul>
-
-          </div>
-        </div>
-      </div>
-    <%#= render "shared/card",  heading: topic.name, link: category_topic_path(topic.category_id, topic) %>
-  <% end %>
-    </div>
-</div>
+  ```
+  <html class="h-full bg-white">
+  <body class="h-full">
+  ```
+-->
+<%= render "dashboard/shared/layout" do %>
+  <h1 class="heading-underlined">Dashboard Home</h1>
+  <p>Content in progres...</p>
+<% end %>

@@ -1,0 +1,39 @@
+
+
+<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+<div class="relative flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+  <nav class="relative flex flex-1 flex-col">
+    <ul role="list" class="flex flex-1 flex-col gap-y-7">
+      <li>
+        <ul role="list" class="-mx-2 space-y-1">
+          <% @topic.posts.each do |post| %>
+            <% if post.parts.present? %>
+              <button type="button" command="--toggle" commandfor='sub-menu-<%= post.id%>' class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50">
+                  <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 shrink-0 not-in-aria-expanded:text-gray-400 in-aria-expanded:rotate-90 in-aria-expanded:text-gray-500">
+                    <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+                  </svg><%= post.title  %>
+              </button>
+              <ul>
+                <el-disclosure id="sub-menu-<%= post.id%>" hidden class="contents">
+                  <ul class="mt-1 px-2 list-disc list-inside">
+                    <% post.parts.each do |part| %>
+                        <li>
+                          <%= link_to part.title, username_topic_post_part_path(@topic.user.username, @topic, post, part), data: { turbo_frame: "content_frame" } %>
+                        </li>
+                        </li>
+                    <% end %>
+                  </ul>
+                  </el-disclosure>
+                </ul>
+
+            <% else %>
+                <%= link_to post.title, username_topic_post_path(@topic.user.username, @topic, post), data: { turbo_frame: "article_frame" }, class: "flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50" %>
+            <% end %>
+          <% end  %>
+        </ul>
+      </li>
+
+    </ul>
+  </nav>
+</div>

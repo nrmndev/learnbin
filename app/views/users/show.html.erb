@@ -1,0 +1,9 @@
+<%= render "users/shared/user_page_heading"  %>
+
+<div class="container mx-auto">
+   <%= turbo_frame_tag "turbo_users_content" do %>
+    <%# Default path is /:username. /:username and /:username/about is sharing a template "_show" to initialize a fallback content for this frame %>
+    <%= render "users/abouts/show", user: @user %>
+  <!-- optionally placeholder while loading, or fallback content -->
+<% end %>
+</div>

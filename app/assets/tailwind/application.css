@@ -47,3 +47,34 @@
 .wysiwyg-content tbody tr:nth-child(even) {
   @apply bg-gray-100;
 }
+
+/*** HEADING ***/
+.heading-underlined {
+  @apply relative border-b border-gray-200 mb-3 pb-2 text-xl font-semibold text-gray-700;
+}
+.heading-underlined:before {
+  content: "";
+  bottom: -1px;
+  left: 0;
+  @apply absolute w-15 h-[1px] bg-indigo-600;
+}
+
+/*** TURBO ALERT NOTICE ***/
+.alert-notice {
+  @apply bg-green-200 p-3;
+}
+
+/*** BUTTON ***/
+.btn-primary {
+  @apply gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 border border-white cursor-pointer;
+}
+
+.styled-border-b {
+  @apply relative border-b border-gray-200 mb-3 pb-2;
+}
+.styled-border-b:before {
+  content: "";
+  bottom: -1px;
+  left: 0;
+  @apply absolute w-15 h-[1px] bg-indigo-600;
+}

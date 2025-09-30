@@ -1,0 +1,17 @@
+<header class="border-b border-gray-200 pl-32">
+  <!-- Secondary navigation -->
+  <nav class="flex overflow-x-auto pb-4">
+    <ul role="list" class="flex min-w-full flex-none gap-x-6 px-4 text-sm/6 font-semibold text-gray-500 sm:px-6 lg:px-8">
+      <li>
+        <%= link_to "About", username_abouts_path,  data: { turbo_frame: "turbo_users_content" }, class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium #{@active_link.in?(["abouts", "users"]) ? "text-indigo-600": ""}"  %>
+      </li>
+      <li>
+        <%= link_to "Topics", username_topics_path, data: { turbo_frame: "turbo_users_content" },
+            class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium #{@active_link == "topics" ? "text-indigo-600": ""}"  %>
+      </li>
+      <li>
+        <%= link_to "Collections", username_collections_path, data: { turbo_frame: "turbo_users_content" }, class: "inline-flex items-center border-transparent border-b-2  px-1 pt-1 text-sm font-medium" %>
+      </li>
+    </ul>
+  </nav>
+</header>

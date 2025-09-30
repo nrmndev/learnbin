@@ -1,21 +1,36 @@
 
   class DiscoverController < ApplicationController
-
+    before_action :discover_params, only: %i[index]
     def index
-      search_term = params.dig(:search, :q)
-      if search_term.present?
-        @topics = Topic.where("name ILIKE ?", "%#{search_term}%")
+          search_by = params[:search_by]
+    query = params[:q]
+
+    # optionally default behaviors
+    if search_by.present? && query.present?
+      case search_by
+      when "user"
+        @results = User.where("name ILIKE ?", "%#{query}%")
+      when "topic"
+        @results = Topic.where("title ILIKE ?", "%#{query}%")
+      when "collection"
+        grouped_cts = CollectionTopic.includes(:topic).all.group_by(&:collection_id)
+        # Optionally load collections so you can show collection titles
+        @results = Collection.where("title ILIKE ?", "%#{query}%").index_by(&:id).values
+
       else
-        @topics = Topic.none
+        @results = []
       end
+    else
+      # no search criteria given — show fallback / all / none
+      @results = []
+    end
 
-
-      respond_to do |format|
-        format.html   # normal load
-        format.turbo_stream  # optional, if you want it
-      end
     end
     # def topics
     #   @topics = Topic.all
     # end
+    private
+    def discover_params
+      params.permit(:search_by, :q)
+    end
   end

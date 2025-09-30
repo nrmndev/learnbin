@@ -1,0 +1,32 @@
+<% content_for :above do %>
+  <%= render "dashboard/shared/archives_top_menu"  %>
+<% end %>
+
+<%= render "dashboard/shared/layout" do %>
+  <%= render "shared/breadcrumbs", links: [
+      { text: "All Posts", url: dashboard_posts_path },
+      { text: @post.title}
+    ]
+  %>
+  <%= render "dashboard/shared/title", title: @post.title %>
+
+  <%= simple_form_for @post, url: dashboard_post_path(@post) do |f| %>
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="col-span-2">
+          <%= render "dashboard/posts/show/form_part", f:f  %>
+        </div>
+
+        <div class="col-span-1">
+          <%= render "dashboard/posts/show/add_to_topics", f:f %>
+          <%= render "dashboard/posts/show/parts_in_this_post" %>
+        </div>
+      </div>
+    </div>
+  <%# END OF SIMPLE_FORM%>
+  <% end %>
+<% end %>
+
+<%#= render 'shared/modal' do %>
+  <%#= render 'dashboard/parts/form'  %>
+<%# end %>

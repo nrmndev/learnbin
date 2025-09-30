@@ -1,8 +1,0 @@
-<%= simple_form_for [@article.topic, @article, @section] do |f| %>
-  <%= f.input :heading %>
-  <div data-controller="tinymce">
-    <%= f.text_area :content, rows: 15, data: { tinymce_target: "textarea" } %>
-  </div>
-  <%= f.input :position %>
-  <%= f.submit %>
-<% end %>

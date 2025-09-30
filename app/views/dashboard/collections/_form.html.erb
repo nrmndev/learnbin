@@ -1,0 +1,7 @@
+<%= simple_form_for @collection, url: dashboard_collection_path(@collection) do |f| %>
+  <%= f.input :title %>
+  <%= render "dashboard/shared/form_field_visibility", f:f  %>
+  <%= render "dashboard/shared/form_field_description", f:f  %>
+  <%= render "dashboard/shared/form_field_category", f:f  %>
+  <%= f.submit class: "btn-primary" %>
+<% end %>

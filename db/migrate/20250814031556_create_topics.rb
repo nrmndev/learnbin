@@ -1,13 +1,14 @@
 class CreateTopics < ActiveRecord::Migration[7.1]
   def change
     create_table :topics do |t|
-      t.references :category, null: false, foreign_key: true
-      t.string :name
+      t.string :title
       t.string :slug
+      t.references :user, null: false, foreign_key: true
       t.text :description
-
+      t.integer :position
+      t.integer :visibility, default: 1
       t.timestamps
     end
-    add_index :topics, :slug
+    add_index :topics, [:user_id, :slug], unique: true
   end
 end
