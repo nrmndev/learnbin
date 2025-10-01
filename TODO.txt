@@ -113,3 +113,28 @@ TODO
   - RESTYLE PAGINATION
 
  ROOT -> /norman
+
+
+NOTWORKING
+ POST
+  - FILTERING
+
+
+RESPONSIVE DESIGN ADJUSTMENTS
+
+DASHBOARD TABLES
+ - Post Association:  Put accordion if more than 2
+ - Table padding
+
+MY PAGE (/NORMAN)
+ - Grids
+     - Swap to table-look ui
+     - Add accordion if posts are more than 3
+     - Add more details like (Date Updated)
+     - Add label "NEW" to POST if topic_posts created_at > 7days
+     - Add label "Updated" to POST if topic_posts updated_at > 7days
+
+
+MY PAGE (/NORMAN/TOPICS/:ID)
+ - Side bar: convert to toggable drawer menu
+ - Add button to toggle sidebar

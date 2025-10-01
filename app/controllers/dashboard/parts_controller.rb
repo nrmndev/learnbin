@@ -9,7 +9,12 @@ module Dashboard
       @part = Part.new
     end
 
-    def index; end
+    def index
+      if params[:search].present?
+        @parts = @parts.search(params[:search])
+      end
+    end
+
     def show; end
     def create
       @part = Part.new(part_params)

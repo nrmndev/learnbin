@@ -8,7 +8,6 @@ module Dashboard
       if params[:search].present?
         @posts = @posts.search_by_title(params[:search])
       end
-
     end
 
     def show

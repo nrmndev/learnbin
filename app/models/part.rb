@@ -13,12 +13,18 @@ acts_as_list scope: :post_parts
   validates :title, presence: true,
     length: {
     minimum: 5,
-    maximum: 50,
+    maximum: 255,
     too_short: "must be at least %{count} characters",
     too_long: "must be at most %{count} characters"
   }
   before_save :normalize_content
   #acts_as_list scope: :post
+
+
+  scope :search, ->(term) {
+    return all if term.blank?
+    where("title ILIKE :q OR description ILIKE :q", q: "%#{term}%")
+  }
 
   private
 

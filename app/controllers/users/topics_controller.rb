@@ -27,9 +27,10 @@ module Users
                   if current_user && current_user.id == user.id
                     relation  # the user is viewing their own page — don’t filter by visibility
                   else
-                    relation.where(visibility: 0)  # filter to only public topics (visibility = 0)
+                    relation.where(visibility: 0) # filter to only public topics (visibility = 0)
                   end
                 end
+                .where.associated(:topic_posts) #7.1Rails above, filter if there is associated topic and post
                 .includes(:topic_posts)
                 .paginate(page: params[:page], per_page: 5)
     end

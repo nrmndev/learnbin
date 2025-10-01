@@ -1,0 +1,50 @@
+<div class="my-4 grid border border-gray-200 shadow rounded-sm">
+  <% @posts.each do |post|  %>
+    <div class="py-2 px-4 grid grid-cols-1 md:grid-cols-6 border-b-2 border-gray-100 hover:bg-gray-50">
+      <div class="grid space-y-1 items-center">
+        <h2 class="font-semibold text-gray-600 text-lg"><%= post.title  %></h2>
+        <div class="flex space-x-4">
+          <%= link_to dashboard_post_path(post.id)  do %>
+            <%= phosphor_icon "pencil", class: "h-8 w-8 text-indigo-600 p-2 bg-white shadow rounded-full" %>
+          <% end  %>
+          <%= button_to post_path(post.id),
+              method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= phosphor_icon "trash", class: "h-8 w-8 text-red-600 p-2 bg-white shadow rounded-full" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-span-1">
+        <h2 class="font-semibold text-gray-600 text-sm">Included in Topic:</h2>
+        <div class="flex gap-2 flex-wrap mt-2">
+          <% post.topics.each do |topic| %>
+            <%= link_to topic.title, dashboard_topic_path(topic), class:"text-indigo-600 p-1 rounded-sm text-sm border border-gray-300" %>
+          <% end %>
+          <%# <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Reiciendis deserunt repellendus</a>
+          <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Voluptas vitae modi dolores quo</a>
+          <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Ea maiores exercitationem eveniet</a>
+          <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Consectetur adipisicing elit</a> %>
+        </div>
+      </div>
+      <div class="col-span-3">
+        <h2 class="font-semibold text-gray-600 text-sm">Parts attached to this Post:</h2>
+        <div class="flex space-x-2 flex-wrap mt-2">
+          <% if post.parts.count > 0 %>
+            <% post.parts.each do |part| %>
+              <%= link_to part.title, dashboard_part_path(part), class:"text-indigo-600 p-1 rounded-sm text-sm border border-gray-300" %>
+            <% end %>
+          <% else %>
+            <p class="text-indigo-600 text-sm">No Parts yet</p>
+          <% end %>
+          <%# <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Lorem ipsum dolor sit.</a>
+          <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Amet consectetur adipisicing elit.</a>
+          <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Veritatis, quas!</a>
+          <a href="#" class="text-indigo-600 p-1 rounded-sm text-sm border border-gray-300">Qas ipsum dolor, adipisicing elit sit amet</a> %>
+        </div>
+      </div>
+
+
+          <span class="text-sm">Last update: <%= post.updated_at.strftime("%d-%m-%Y, %H:%M:%S")  %></span>
+
+    </div>
+  <% end %>
+</div>

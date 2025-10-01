@@ -11,7 +11,7 @@ class Collection < ApplicationRecord
   validates :title,
     length: {
     minimum: 5,
-    maximum: 50,
+    maximum: 255,
     too_short: "for collection must be at least %{count} characters",
     too_long: "for collection must be at most %{count} characters"
   }, uniqueness: { scope: :user_id, message: "you already have a collection with that title" }
